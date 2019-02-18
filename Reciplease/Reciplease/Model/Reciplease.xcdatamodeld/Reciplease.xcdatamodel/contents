@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14460.32" systemVersion="18A391" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Favorites" representedClassName=".Favorites" syncable="YES" codeGenerationType="category">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="ingredients" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Ingredients" inverseName="favorite" inverseEntity="Ingredients" syncable="YES"/>
+    </entity>
+    <entity name="Ingredients" representedClassName=".Ingredients" syncable="YES" codeGenerationType="category">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="favorite" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Favorites" inverseName="ingredients" inverseEntity="Favorites" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Favorites" positionX="-30.6640625" positionY="862.24609375" width="128" height="73"/>
+        <element name="Ingredients" positionX="187.9765625" positionY="915.4453125" width="117.30078125" height="73"/>
+    </elements>
+</model>
