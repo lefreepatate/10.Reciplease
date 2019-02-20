@@ -15,7 +15,6 @@ class SearchViewController: UIViewController {
    @IBOutlet weak var clearButton: UIButton!
    @IBOutlet weak var ingredientsList: UITextView!
    var ingredient = Ingredients()
-   var recipes = [Reciplease]()
    @IBAction func searchRecipesButton(_ sender: UIButton) {
 
    }

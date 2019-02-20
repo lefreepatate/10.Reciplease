@@ -12,7 +12,7 @@ class ResultsViewController: UIViewController {
    
    
    @IBOutlet weak var tableView: UITableView!
-   var recipes: [Match] = [Match]()
+   var recipes: [[String: Any]] =  [[String: Any]]()
    var ingredient = Ingredients()
    override func viewWillAppear(_ animated: Bool) {
       super.viewWillAppear(animated)
@@ -21,7 +21,7 @@ class ResultsViewController: UIViewController {
    override func viewDidLoad() {
       super.viewDidLoad()
       RecipeService.shared.getRecipes { (response, error) in
-         if let response = response?[0].matches {
+         if let response = response {
             self.recipes = response
             self.tableView.reloadData()
          } else if let error = error {
@@ -56,9 +56,7 @@ class ResultsViewController: UIViewController {
    }
 }
 extension ResultsViewController: UITableViewDataSource {
-   func numberOfSections(in tableView: UITableView) -> Int {
-      return 1
-   }
+
    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
       return recipes.count
    }
@@ -68,16 +66,14 @@ extension ResultsViewController: UITableViewDataSource {
       guard let cell = tableView.dequeueReusableCell(withIdentifier: "RecipesCell", for: indexPath) as? RecipesTableViewcell else { return UITableViewCell() }
       // Récupération des données à insérer
       if self.recipes.count > 0 {
-         let receip = recipes[indexPath.row]
-         //         let imageName = "\(eachRecip.matches[0].imageUrlsBySize!)"
-         //         let image = UIImage(named: imageName)
-         cell.configure(title: receip.recipeName!)
-         cell.receipTitle?.text = receip.recipeName!
-         cell.receipTitle?.text = "\(receip.recipeName!)"
-         cell.ingredientsDescr?.text = "\(receip.ingredients!.joined(separator: ", "))"
-         cell.notation?.text = "\(receip.rating!)"
-         //         cell.picture = UIImageView(image: image)
-//         print("Title: \(String(describing: cell.receipTitle!.text))\nIngredients: \(String(describing: cell.ingredientsDescr!.text))\nNotation: \(String(describing: cell.notation!.text))\nIndexPath : \(indexPath.row)")
+         let recipe = recipes[indexPath.row]
+         let ingredients =  recipe["ingredients"] as? [String] ?? ["ingredients"]
+         let imageName = recipe["imageUrlsBySize"] as? String
+         cell.recipeTitle?.text = "\(recipe["recipeName"]  ?? "Titre")"
+         cell.ingredientsDescr?.text = ingredients.joined(separator: ", ")
+         cell.notation?.text = "\(recipe["rating"] ?? "note")"
+         cell.length?.text = "\((recipe["totalTimeInSeconds"] as! Int) / 60) min"
+         print("Title: \(String(describing: cell.recipeTitle!.text))\nIngredients: \(String(describing: cell.ingredientsDescr!.text))\nNotation: \(String(describing: cell.notation!.text))\n\n\n")
       }
       return cell
    }

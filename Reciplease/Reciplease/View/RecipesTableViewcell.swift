@@ -11,7 +11,7 @@ import UIKit
 class RecipesTableViewcell: UITableViewCell {
    @IBOutlet weak var whiteView: UIView!
    @IBOutlet weak var picture: UIImageView?
-   @IBOutlet weak var receipTitle: UILabel?
+   @IBOutlet weak var recipeTitle: UILabel?
    @IBOutlet weak var length: UILabel?
    @IBOutlet weak var ingredientsDescr: UILabel?
    @IBOutlet weak var notation: UILabel?
@@ -27,10 +27,7 @@ class RecipesTableViewcell: UITableViewCell {
       whiteView.layer.shadowOpacity = 2.0
    }
    
-   func configure( title: String) {
-//      photoView.image = UIImage(named: icon)
-      receipTitle?.text = title
-   }
+
    
    //    override func setSelected(_ selected: Bool, animated: Bool) {
    //        super.setSelected(selected, animated: animated)

@@ -11,10 +11,7 @@
 		AAAB06910B3437AA00603C95 /* Pods_Reciplease.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0F54BF4D86A8BA2AB3F43A3 /* Pods_Reciplease.framework */; };
 		EC0DF37D221478AE00F2D788 /* Ingredients.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0DF37C221478AE00F2D788 /* Ingredients.swift */; };
 		EC0DF37F22147E0B00F2D788 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD9F8B42209DEDE007DE7E2 /* AppDelegate.swift */; };
-		EC0DF3852214846E00F2D788 /* Favorites.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0DF3842214846E00F2D788 /* Favorites.swift */; };
-		EC36DF8C2211D75F009D81E9 /* SettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC36DF8B2211D75F009D81E9 /* SettingsService.swift */; };
 		EC3A3862220AFE5E000220C5 /* RecipesTableViewcell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3A3861220AFE5E000220C5 /* RecipesTableViewcell.swift */; };
-		EC4AE6B1221C4740005491CC /* JSON_Receips.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC4AE6B0221C4740005491CC /* JSON_Receips.swift */; };
 		ECD9F8B72209DEDE007DE7E2 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD9F8B62209DEDE007DE7E2 /* SearchViewController.swift */; };
 		ECD9F8B92209DEDE007DE7E2 /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD9F8B82209DEDE007DE7E2 /* ResultsViewController.swift */; };
 		ECD9F8BC2209DEDE007DE7E2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECD9F8BA2209DEDE007DE7E2 /* Main.storyboard */; };
@@ -42,10 +39,7 @@
 		A0F54BF4D86A8BA2AB3F43A3 /* Pods_Reciplease.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Reciplease.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8DCBB2094F735C1AABE86BA /* Pods-RecipleaseTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecipleaseTests.release.xcconfig"; path = "Target Support Files/Pods-RecipleaseTests/Pods-RecipleaseTests.release.xcconfig"; sourceTree = "<group>"; };
 		EC0DF37C221478AE00F2D788 /* Ingredients.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ingredients.swift; sourceTree = "<group>"; };
-		EC0DF3842214846E00F2D788 /* Favorites.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favorites.swift; sourceTree = "<group>"; };
-		EC36DF8B2211D75F009D81E9 /* SettingsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsService.swift; sourceTree = "<group>"; };
 		EC3A3861220AFE5E000220C5 /* RecipesTableViewcell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesTableViewcell.swift; sourceTree = "<group>"; };
-		EC4AE6B0221C4740005491CC /* JSON_Receips.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSON_Receips.swift; sourceTree = "<group>"; };
 		ECD9F8B12209DEDE007DE7E2 /* Reciplease.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reciplease.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECD9F8B42209DEDE007DE7E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ECD9F8B62209DEDE007DE7E2 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -164,11 +158,8 @@
 		ECD9F8DA2209F1C1007DE7E2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				EC0DF3842214846E00F2D788 /* Favorites.swift */,
 				EC0DF37C221478AE00F2D788 /* Ingredients.swift */,
 				ECD9F8D62209F0A6007DE7E2 /* RecipeService.swift */,
-				EC4AE6B0221C4740005491CC /* JSON_Receips.swift */,
-				EC36DF8B2211D75F009D81E9 /* SettingsService.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -327,12 +318,14 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Reciplease/Pods-Reciplease-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -346,15 +339,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EC0DF3852214846E00F2D788 /* Favorites.swift in Sources */,
 				EC3A3862220AFE5E000220C5 /* RecipesTableViewcell.swift in Sources */,
 				ECD9F8B92209DEDE007DE7E2 /* ResultsViewController.swift in Sources */,
 				ECD9F8B72209DEDE007DE7E2 /* SearchViewController.swift in Sources */,
 				EC0DF37D221478AE00F2D788 /* Ingredients.swift in Sources */,
 				EC0DF37F22147E0B00F2D788 /* AppDelegate.swift in Sources */,
-				EC36DF8C2211D75F009D81E9 /* SettingsService.swift in Sources */,
 				ECD9F8D72209F0A6007DE7E2 /* RecipeService.swift in Sources */,
-				EC4AE6B1221C4740005491CC /* JSON_Receips.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

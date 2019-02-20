@@ -25,24 +25,25 @@ class RecipeService {
          UserDefaults.standard.set(newValue, forKey: Keys.ingredient)
       }
    }
-   typealias WebServiceResponse = ([Reciplease]?, Error?) -> Void
+   typealias WebServiceResponse = ([[String: Any]]?, Error?) -> Void
    
    func getRecipes(completion: @escaping WebServiceResponse) {
       let urlRequest = getUrlRequest()
-      AF.request(urlRequest).responseJSON { response in
+      Alamofire.request(urlRequest).responseJSON { response in
          if let error = response.error {
             print(error)
             completion(nil, error)
-         } else if let responseJSON = try? JSONDecoder().decode(Reciplease.self, from: (response.data)!) {
-            completion([responseJSON], nil)
+         } else if let jsonArray = response.result.value as! [String: Any]? {
+            if let recipeResponse = jsonArray["matches"] as! [[String: Any]]? {
+               completion(recipeResponse, nil)
+            }
          }
       }
    }
-   
    private func getUrlRequest() -> URLRequest {
       let apiURL = "https://api.yummly.com/v1/api/recipes"
-      let id = "***"
-      let key = "***"
+      let id = "2086ff63"
+      let key = "59464313e760172eb790990315f5408d"
       let ingredients = "\(getIngredients())"
       let parameters = "?_app_id=\(id)&_app_key=\(key)&q=\(ingredients)"
       let url = URL(string: apiURL + parameters)!
