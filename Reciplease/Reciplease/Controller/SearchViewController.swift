@@ -21,8 +21,6 @@ class SearchViewController: UIViewController {
    override func viewDidLoad() {
       super.viewDidLoad()
       refreshList()
-      
-      // Do any additional setup after loading the view, typically from a nib.
    }
    @IBAction func addIngredientTappedButton(_ sender: UIButton) {
       addIngredients()
@@ -43,12 +41,10 @@ class SearchViewController: UIViewController {
       for _ in ingredientsList.text.components(separatedBy: "\n") {
          ingredientsList.text = ""
          for recipeIngredient in RecipeService.shared.ingredients {
-            
             ingredientsList.text += recipeIngredient.name + "\n"
          }
       }
    }
-
 }
 
 extension SearchViewController: UITextFieldDelegate {

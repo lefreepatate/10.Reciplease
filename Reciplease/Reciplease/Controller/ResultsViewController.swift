@@ -8,6 +8,8 @@
 
 import UIKit
 import CoreData
+import AlamofireImage
+import Alamofire
 class ResultsViewController: UIViewController {
    
    
@@ -30,22 +32,9 @@ class ResultsViewController: UIViewController {
       }
    }
    @IBAction func favoriteButton(_ sender: UIButton) {
-      
       for cell in tableView.visibleCells {
          addFavorite(with: (cell.textLabel?.text) ?? "nada")
       }
-   }
-   //   fileprivate func displayFavoriteCells(with name: String) {
-   //      for favorite in Favorites.all {
-   //         guard let favorites = tableView.dequeueReusableCell(withIdentifier: "PresentRecipCell") as? PresentTableViewCell else {return}
-   //
-   //         favorite.name = RecipeService.favorites
-   //         favorites.configure(title: RecipeService.favorites)
-   //      }
-   //      print(name)
-   //   }
-   func setRecipes() {
-      
    }
    func addFavorite(with name: String) {
       // Appelle le coredata
@@ -56,7 +45,7 @@ class ResultsViewController: UIViewController {
    }
 }
 extension ResultsViewController: UITableViewDataSource {
-
+   
    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
       return recipes.count
    }
@@ -68,24 +57,33 @@ extension ResultsViewController: UITableViewDataSource {
       if self.recipes.count > 0 {
          let recipe = recipes[indexPath.row]
          let ingredients =  recipe["ingredients"] as? [String] ?? ["ingredients"]
-         let imageName = recipe["imageUrlsBySize"] as? String
+         let imgURL = recipe["smallImageUrls"] as? [String] ?? ["image"]
+         //         self.getAlamofireImage(with: imgURL.joined(separator: ""))
          cell.recipeTitle?.text = "\(recipe["recipeName"]  ?? "Titre")"
          cell.ingredientsDescr?.text = ingredients.joined(separator: ", ")
          cell.notation?.text = "\(recipe["rating"] ?? "note")"
          cell.length?.text = "\((recipe["totalTimeInSeconds"] as! Int) / 60) min"
-         print("Title: \(String(describing: cell.recipeTitle!.text))\nIngredients: \(String(describing: cell.ingredientsDescr!.text))\nNotation: \(String(describing: cell.notation!.text))\n\n\n")
+         Alamofire.request(imgURL.joined(separator: "")).responseImage { (response) in
+            if let image = response.result.value {
+               let size = CGSize(width: 100, height: 100)
+               let scaledImage = image.af_imageScaled(to: size)
+               DispatchQueue.main.async {
+                  cell.picture?.image = scaledImage
+               }
+            }
+         }
       }
       return cell
    }
 }
 extension ResultsViewController: UITableViewDelegate {
-      func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-         if editingStyle == .delete {
-            // Supprimer d'abord les données de la cellule
-            recipes.remove(at: indexPath.row)
-            // Puis la cellule
-            tableView.deleteRows(at: [indexPath], with:.middle)
-            try? AppDelegate.viewContext.save()
-         }
+   func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+      if editingStyle == .delete {
+         // Supprimer d'abord les données de la cellule
+         recipes.remove(at: indexPath.row)
+         // Puis la cellule
+         tableView.deleteRows(at: [indexPath], with:.middle)
+         try? AppDelegate.viewContext.save()
       }
+   }
 }
