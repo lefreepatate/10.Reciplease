@@ -42,8 +42,8 @@ class RecipeService {
    }
    private func getUrlRequest() -> URLRequest {
       let apiURL = "https://api.yummly.com/v1/api/recipes"
-      let id = "2086ff63"
-      let key = "59464313e760172eb790990315f5408d"
+      let id = "***"
+      let key = "***"
       let ingredients = "\(getIngredients())"
       let parameters = "?_app_id=\(id)&_app_key=\(key)&q=\(ingredients)"
       let url = URL(string: apiURL + parameters)!
