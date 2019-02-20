@@ -8,10 +8,13 @@
 
 import UIKit
 
-class PresentTableViewCell: UITableViewCell {
+class RecipesTableViewcell: UITableViewCell {
    @IBOutlet weak var whiteView: UIView!
-   @IBOutlet weak var photoView: UIImageView!
-   @IBOutlet weak var favoriteReceip: UILabel!
+   @IBOutlet weak var picture: UIImageView?
+   @IBOutlet weak var receipTitle: UILabel?
+   @IBOutlet weak var length: UILabel?
+   @IBOutlet weak var ingredientsDescr: UILabel?
+   @IBOutlet weak var notation: UILabel?
    
    override func awakeFromNib() {
       super.awakeFromNib()
@@ -26,7 +29,7 @@ class PresentTableViewCell: UITableViewCell {
    
    func configure( title: String) {
 //      photoView.image = UIImage(named: icon)
-      favoriteReceip.text = title
+      receipTitle?.text = title
    }
    
    //    override func setSelected(_ selected: Bool, animated: Bool) {
