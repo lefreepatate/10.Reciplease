@@ -20,7 +20,8 @@ class SearchViewController: UIViewController {
    }
    override func viewDidLoad() {
       super.viewDidLoad()
-      refreshList()
+      ingredientsList.text = "Tomatoe Bacon"
+//      refreshList()
    }
    @IBAction func addIngredientTappedButton(_ sender: UIButton) {
       addIngredients()

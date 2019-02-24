@@ -8,6 +8,7 @@
 
 import Foundation
 import Alamofire
+import AlamofireImage
 
 class RecipeService {
    static let shared = RecipeService()
@@ -30,16 +31,24 @@ class RecipeService {
    func getRecipes(completion: @escaping WebServiceResponse) {
       let urlRequest = getUrlRequest()
       Alamofire.request(urlRequest).responseJSON { response in
-         if let error = response.error {
-            print(error)
-            completion(nil, error)
-         } else if let jsonArray = response.result.value as! [String: Any]? {
+         if let jsonArray = response.result.value as! [String: Any]? {
             if let recipeResponse = jsonArray["matches"] as! [[String: Any]]? {
                completion(recipeResponse, nil)
             }
          }
       }
    }
+   
+   func getImage(with stringURL : String, completion : @escaping (UIImage?, Error?) -> Void) {
+      Alamofire.request(stringURL).responseImage { (response) in
+         if let image = response.result.value {
+            let size = CGSize(width: 90, height: 90)
+            let scaledImage = image.af_imageScaled(to: size)
+            completion(scaledImage, nil)
+         }
+      }
+   }
+   
    private func getUrlRequest() -> URLRequest {
       let apiURL = "https://api.yummly.com/v1/api/recipes"
       let id = "***"

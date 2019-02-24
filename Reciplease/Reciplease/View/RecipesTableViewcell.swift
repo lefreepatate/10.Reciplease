@@ -15,7 +15,6 @@ class RecipesTableViewcell: UITableViewCell {
    @IBOutlet weak var length: UILabel?
    @IBOutlet weak var ingredientsDescr: UILabel?
    @IBOutlet weak var notation: UILabel?
-   
    override func awakeFromNib() {
       super.awakeFromNib()
       addShadow()
@@ -25,14 +24,5 @@ class RecipesTableViewcell: UITableViewCell {
       whiteView.layer.shadowRadius = 2.0
       whiteView.layer.shadowOffset = CGSize(width: 2, height: 2)
       whiteView.layer.shadowOpacity = 2.0
-   }
-   
-
-   
-   //    override func setSelected(_ selected: Bool, animated: Bool) {
-   //        super.setSelected(selected, animated: animated)
-   //
-   //        // Configure the view for the selected state
-   //    }
-   
+   }   
 }
