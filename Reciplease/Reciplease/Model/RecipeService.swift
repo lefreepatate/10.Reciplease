@@ -14,18 +14,7 @@ class RecipeService {
    static let shared = RecipeService()
    init() {}
    var ingredients: [Ingredients] = []
-   private struct Keys {
-      static var ingredient = "\(RecipeService.shared.ingredients)"
-   }
-   static var favorites: String {
-      
-      get {
-         return UserDefaults.standard.string(forKey: Keys.ingredient) ?? ""
-      }
-      set {
-         UserDefaults.standard.set(newValue, forKey: Keys.ingredient)
-      }
-   }
+
    typealias WebServiceResponse = ([[String: Any]]?, Error?) -> Void
    
    func getRecipes(completion: @escaping WebServiceResponse) {
@@ -63,7 +52,7 @@ class RecipeService {
    
    private func getIngredients() -> String {
       var q = ""
-      for element in RecipeService.shared.ingredients {
+      for element in ingredients {
          q += element.name + "+"
       }
       return q

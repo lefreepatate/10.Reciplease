@@ -7,14 +7,7 @@
 //
 
 import Foundation
-//import CoreData
 
 struct Ingredients {
    var name = ""
-//   static var all: [Ingredients] {
-//      let request: NSFetchRequest<Ingredients> = Ingredients.fetchRequest()
-//      guard let ingredients = try? AppDelegate.viewContext.fetch(request) else {return [] }
-//      print(ingredients.count)
-//      return ingredients
-//   }
 }

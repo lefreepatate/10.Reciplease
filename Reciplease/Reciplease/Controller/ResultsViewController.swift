@@ -51,7 +51,8 @@ extension ResultsViewController: UITableViewDataSource {
    }
    
    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-      guard let cell = tableView.dequeueReusableCell(withIdentifier: "RecipesCell", for: indexPath) as? RecipesTableViewcell else { return UITableViewCell() }
+      guard let cell = tableView.dequeueReusableCell(withIdentifier: "RecipesCell", for: indexPath)
+         as? RecipesTableViewcell else { return UITableViewCell() }
       if self.recipes.count > 0 {
          let recipe = recipes[indexPath.row]
          let ingredients =  recipe["ingredients"] as? [String] ?? ["ingredients"]
@@ -70,7 +71,8 @@ extension ResultsViewController: UITableViewDataSource {
    }
    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
       let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-      let destinationVC = storyBoard.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
+      let destinationVC = storyBoard.instantiateViewController(withIdentifier: "DetailViewController")
+         as! DetailViewController
       let recipe = recipes[indexPath.row]
       destinationVC.getRecipeID = recipe["id"] as! String
       print(destinationVC.getRecipeID)
@@ -78,7 +80,8 @@ extension ResultsViewController: UITableViewDataSource {
    }
 }
 extension ResultsViewController: UITableViewDelegate {
-   func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+   func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle,
+                  forRowAt indexPath: IndexPath) {
       if editingStyle == .delete {
          // Supprimer d'abord les données de la cellule
          recipes.remove(at: indexPath.row)

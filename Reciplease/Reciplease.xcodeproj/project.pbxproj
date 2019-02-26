@@ -12,6 +12,8 @@
 		EC0DF37D221478AE00F2D788 /* Ingredients.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0DF37C221478AE00F2D788 /* Ingredients.swift */; };
 		EC0DF37F22147E0B00F2D788 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD9F8B42209DEDE007DE7E2 /* AppDelegate.swift */; };
 		EC29628722214FA900A945FA /* DetailRecipeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC29628622214FA900A945FA /* DetailRecipeService.swift */; };
+		EC33E1902225525600FC7575 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC33E18F2225525600FC7575 /* FavoritesViewController.swift */; };
+		EC33E194222576BD00FC7575 /* FavoriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC33E193222576BD00FC7575 /* FavoriteTableViewCell.swift */; };
 		EC3A3862220AFE5E000220C5 /* RecipesTableViewcell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3A3861220AFE5E000220C5 /* RecipesTableViewcell.swift */; };
 		EC6CB0CB22205F0500F8B135 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6CB0CA22205F0500F8B135 /* DetailViewController.swift */; };
 		EC9A4DD82220256F00352A83 /* Reciplease.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EC9A4DD62220256F00352A83 /* Reciplease.xcdatamodeld */; };
@@ -44,6 +46,8 @@
 		D8DCBB2094F735C1AABE86BA /* Pods-RecipleaseTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecipleaseTests.release.xcconfig"; path = "Target Support Files/Pods-RecipleaseTests/Pods-RecipleaseTests.release.xcconfig"; sourceTree = "<group>"; };
 		EC0DF37C221478AE00F2D788 /* Ingredients.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ingredients.swift; sourceTree = "<group>"; };
 		EC29628622214FA900A945FA /* DetailRecipeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRecipeService.swift; sourceTree = "<group>"; };
+		EC33E18F2225525600FC7575 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
+		EC33E193222576BD00FC7575 /* FavoriteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteTableViewCell.swift; sourceTree = "<group>"; };
 		EC3A3861220AFE5E000220C5 /* RecipesTableViewcell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesTableViewcell.swift; sourceTree = "<group>"; };
 		EC6CB0CA22205F0500F8B135 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		EC9A4DD72220256F00352A83 /* Favorites.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Favorites.xcdatamodel; sourceTree = "<group>"; };
@@ -148,6 +152,7 @@
 			isa = PBXGroup;
 			children = (
 				EC6CB0CA22205F0500F8B135 /* DetailViewController.swift */,
+				EC33E18F2225525600FC7575 /* FavoritesViewController.swift */,
 				ECD9F8B62209DEDE007DE7E2 /* SearchViewController.swift */,
 				ECD9F8B82209DEDE007DE7E2 /* ResultsViewController.swift */,
 			);
@@ -159,6 +164,7 @@
 			children = (
 				ECD9F8BA2209DEDE007DE7E2 /* Main.storyboard */,
 				EC3A3861220AFE5E000220C5 /* RecipesTableViewcell.swift */,
+				EC33E193222576BD00FC7575 /* FavoriteTableViewCell.swift */,
 				ECD9F8BF2209DEDF007DE7E2 /* LaunchScreen.storyboard */,
 			);
 			path = View;
@@ -352,11 +358,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				EC6CB0CB22205F0500F8B135 /* DetailViewController.swift in Sources */,
+				EC33E194222576BD00FC7575 /* FavoriteTableViewCell.swift in Sources */,
 				EC3A3862220AFE5E000220C5 /* RecipesTableViewcell.swift in Sources */,
 				EC29628722214FA900A945FA /* DetailRecipeService.swift in Sources */,
 				ECD9F8B92209DEDE007DE7E2 /* ResultsViewController.swift in Sources */,
 				ECD9F8B72209DEDE007DE7E2 /* SearchViewController.swift in Sources */,
 				EC9A4DD82220256F00352A83 /* Reciplease.xcdatamodeld in Sources */,
+				EC33E1902225525600FC7575 /* FavoritesViewController.swift in Sources */,
 				EC0DF37D221478AE00F2D788 /* Ingredients.swift in Sources */,
 				EC9A4DDA2220264500352A83 /* Favorites.swift in Sources */,
 				EC0DF37F22147E0B00F2D788 /* AppDelegate.swift in Sources */,

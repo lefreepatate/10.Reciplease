@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import CoreData
 class SearchViewController: UIViewController {
    
    @IBOutlet weak var searchBar: UITextField!
@@ -21,7 +22,6 @@ class SearchViewController: UIViewController {
    override func viewDidLoad() {
       super.viewDidLoad()
       ingredientsList.text = "Tomatoe Bacon"
-//      refreshList()
    }
    @IBAction func addIngredientTappedButton(_ sender: UIButton) {
       addIngredients()
