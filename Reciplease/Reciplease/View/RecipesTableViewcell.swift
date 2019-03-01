@@ -10,19 +10,19 @@ import UIKit
 
 class RecipesTableViewcell: UITableViewCell {
    @IBOutlet weak var whiteView: UIView!
-   @IBOutlet weak var picture: UIImageView?
-   @IBOutlet weak var recipeTitle: UILabel?
-   @IBOutlet weak var length: UILabel?
-   @IBOutlet weak var ingredientsDescr: UILabel?
-   @IBOutlet weak var notation: UILabel?
+   @IBOutlet weak var picture: UIImageView!
+   @IBOutlet weak var recipeTitle: UILabel!
+   @IBOutlet weak var length: UILabel!
+   @IBOutlet weak var ingredientsDescr: UILabel!
+   @IBOutlet weak var notation: UILabel!
    override func awakeFromNib() {
       super.awakeFromNib()
       addShadow()
    }
    private func addShadow(){
-      whiteView.layer.shadowColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.5)
-      whiteView.layer.shadowRadius = 2.0
-      whiteView.layer.shadowOffset = CGSize(width: 2, height: 2)
-      whiteView.layer.shadowOpacity = 2.0
+//      whiteView.layer.shadowColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.5)
+//      whiteView.layer.shadowRadius = 2.0
+//      whiteView.layer.shadowOffset = CGSize(width: 2, height: 2)
+//      whiteView.layer.shadowOpacity = 2.0
    }   
 }

@@ -9,30 +9,30 @@
 import Foundation
 import UIKit
 import Alamofire
+import CoreData
 
 class DetailViewController: UIViewController {
    
    @IBOutlet weak var recipeTitle: UILabel!
-   @IBOutlet weak var recipeImage: UIImageView?
+   @IBOutlet weak var recipeImage: UIImageView!
    @IBOutlet weak var recipeIngredients: UITextView!
    @IBOutlet weak var recipeRating: UILabel!
    @IBOutlet weak var recipeLenght: UILabel!
    
    var getRecipeID = ""
-   var recipeData: [String:Any]?
+   var recipeData: [String:Any] = [String:Any]()
    
    override func viewDidLoad() {
       super.viewDidLoad()
+      self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "★", style: .plain, target: self, action: #selector(saveFavorite))
       getRecipeDetails()
    }
    @IBAction func getRecipeButton(_ sender: Any) {
-      UIApplication.shared.open(URL(string: getSafariURL())!,
-                                options: [:], completionHandler: nil)
+      guard let url = URL(string: getSafariURL()) else {return}
+      UIApplication.shared.open(url, options: [:], completionHandler: nil)
    }
    
-   @IBAction func favoriteTappedButton(_ sender: UIButton) {
-      saveFavorite()
-   }
+   
    func getRecipeDetails() {
       DetailRecipeService.shared.getDetail(with: getRecipeID) { (response, error) in
          if let response = response  {
@@ -52,13 +52,13 @@ class DetailViewController: UIViewController {
          }
       }
    }
-   private func saveFavorite() {
+   @objc private func saveFavorite() {
       guard let favoriteName = recipeTitle.text,
-         let image = recipeImage?.image?.pngData(),
-         let length = recipeLenght?.text,
+         let image = recipeImage.image?.pngData(),
+         let length = recipeLenght.text,
          let ingredients = recipeIngredients.text,
          let rating = recipeRating.text,
-         let id = recipeData!["id"] else {return}
+         let id = recipeData["id"] else {return}
       
       let favorite = Favorites(context: AppDelegate.viewContext)
       favorite.length = length
@@ -67,21 +67,30 @@ class DetailViewController: UIViewController {
       favorite.name = favoriteName
       favorite.ingredients = ingredients
       favorite.id = (id as! String)
-      
+      navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
       try? AppDelegate.viewContext.save()
    }
    private func getSafariURL() -> String {
-      guard let source = recipeData!["source"] as! [String:Any]? else { return "" }
-      return (source["sourceRecipeUrl"] as! String?)!
+      guard let source = recipeData["source"] as! [String:Any]? else { return "" }
+      return source["sourceRecipeUrl"] as? String ?? "Source Failed"
    }
    func setDatas(){
-      let images = self.recipeData!["images"] as! [[String:Any]]?
-      let urlImage = images![0]["hostedLargeUrl"] as! String?
-      self.detailImage(with: urlImage!)
-      recipeTitle?.text = self.recipeData!["name"] as! String?
-      recipeIngredients?.text = (self.recipeData!["ingredientLines"]
-         as? [String])!.joined(separator: "\n")
-      recipeRating?.text = "\(self.recipeData!["rating"] as! Int)"
-      recipeLenght.text = "\((self.recipeData!["totalTimeInSeconds"] as! Int) / 60) Min"
+      let images = self.recipeData["images"] as? [[String:Any]]
+      let urlImage = images?[0]["hostedLargeUrl"] as? String
+      self.detailImage(with: urlImage ?? "")
+      recipeTitle.text = self.recipeData["name"] as? String
+      recipeIngredients?.text = (self.recipeData["ingredientLines"] as? [String])?.joined(separator: "\n")
+      recipeRating.text = "\(self.recipeData["rating"] as? Int ?? 0)"
+      recipeLenght.text = "\((self.recipeData["totalTimeInSeconds"] as? Int ?? 0) / 60) Min"
+      favoriteButtonNavigationBar(on: (self.recipeData["id"] as! String))
+   }
+   func favoriteButtonNavigationBar(on id: String) {
+      for favorite in Favorites.all {
+         if (favorite.id) != id {
+            navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+         } else if (favorite.id) == id {
+            navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+         }
+      }
    }
 }

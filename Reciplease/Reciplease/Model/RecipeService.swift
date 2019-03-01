@@ -20,8 +20,8 @@ class RecipeService {
    func getRecipes(completion: @escaping WebServiceResponse) {
       let urlRequest = getUrlRequest()
       Alamofire.request(urlRequest).responseJSON { response in
-         if let jsonArray = response.result.value as! [String: Any]? {
-            if let recipeResponse = jsonArray["matches"] as! [[String: Any]]? {
+         if let jsonArray = response.result.value as? [String: Any] {
+            if let recipeResponse = jsonArray["matches"] as? [[String: Any]] {
                completion(recipeResponse, nil)
             }
          }

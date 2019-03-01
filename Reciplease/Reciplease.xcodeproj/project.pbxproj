@@ -18,6 +18,10 @@
 		EC6CB0CB22205F0500F8B135 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6CB0CA22205F0500F8B135 /* DetailViewController.swift */; };
 		EC9A4DD82220256F00352A83 /* Reciplease.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EC9A4DD62220256F00352A83 /* Reciplease.xcdatamodeld */; };
 		EC9A4DDA2220264500352A83 /* Favorites.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9A4DD92220264500352A83 /* Favorites.swift */; };
+		EC9C87932227EDC700C40452 /* Quicksand-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EC9C878F2227EDC600C40452 /* Quicksand-Light.ttf */; };
+		EC9C87942227EDC700C40452 /* Quicksand-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EC9C87902227EDC600C40452 /* Quicksand-Medium.ttf */; };
+		EC9C87952227EDC700C40452 /* Quicksand-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EC9C87912227EDC600C40452 /* Quicksand-Bold.ttf */; };
+		EC9C87962227EDC700C40452 /* Quicksand-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EC9C87922227EDC600C40452 /* Quicksand-Regular.ttf */; };
 		ECD9F8B72209DEDE007DE7E2 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD9F8B62209DEDE007DE7E2 /* SearchViewController.swift */; };
 		ECD9F8B92209DEDE007DE7E2 /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD9F8B82209DEDE007DE7E2 /* ResultsViewController.swift */; };
 		ECD9F8BC2209DEDE007DE7E2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECD9F8BA2209DEDE007DE7E2 /* Main.storyboard */; };
@@ -52,6 +56,10 @@
 		EC6CB0CA22205F0500F8B135 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		EC9A4DD72220256F00352A83 /* Favorites.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Favorites.xcdatamodel; sourceTree = "<group>"; };
 		EC9A4DD92220264500352A83 /* Favorites.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favorites.swift; sourceTree = "<group>"; };
+		EC9C878F2227EDC600C40452 /* Quicksand-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-Light.ttf"; sourceTree = "<group>"; };
+		EC9C87902227EDC600C40452 /* Quicksand-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-Medium.ttf"; sourceTree = "<group>"; };
+		EC9C87912227EDC600C40452 /* Quicksand-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-Bold.ttf"; sourceTree = "<group>"; };
+		EC9C87922227EDC600C40452 /* Quicksand-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-Regular.ttf"; sourceTree = "<group>"; };
 		ECD9F8B12209DEDE007DE7E2 /* Reciplease.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reciplease.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECD9F8B42209DEDE007DE7E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ECD9F8B62209DEDE007DE7E2 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -135,6 +143,10 @@
 				ECD9F8B42209DEDE007DE7E2 /* AppDelegate.swift */,
 				ECD9F8BD2209DEDF007DE7E2 /* Assets.xcassets */,
 				ECD9F8C22209DEDF007DE7E2 /* Info.plist */,
+				EC9C87912227EDC600C40452 /* Quicksand-Bold.ttf */,
+				EC9C878F2227EDC600C40452 /* Quicksand-Light.ttf */,
+				EC9C87902227EDC600C40452 /* Quicksand-Medium.ttf */,
+				EC9C87922227EDC600C40452 /* Quicksand-Regular.ttf */,
 			);
 			path = Reciplease;
 			sourceTree = "<group>";
@@ -151,10 +163,10 @@
 		ECD9F8D82209F1BD007DE7E2 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				EC6CB0CA22205F0500F8B135 /* DetailViewController.swift */,
-				EC33E18F2225525600FC7575 /* FavoritesViewController.swift */,
 				ECD9F8B62209DEDE007DE7E2 /* SearchViewController.swift */,
 				ECD9F8B82209DEDE007DE7E2 /* ResultsViewController.swift */,
+				EC6CB0CA22205F0500F8B135 /* DetailViewController.swift */,
+				EC33E18F2225525600FC7575 /* FavoritesViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -173,10 +185,10 @@
 		ECD9F8DA2209F1C1007DE7E2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				EC0DF37C221478AE00F2D788 /* Ingredients.swift */,
 				ECD9F8D62209F0A6007DE7E2 /* RecipeService.swift */,
 				EC29628622214FA900A945FA /* DetailRecipeService.swift */,
 				EC9A4DD92220264500352A83 /* Favorites.swift */,
+				EC0DF37C221478AE00F2D788 /* Ingredients.swift */,
 				EC9A4DD62220256F00352A83 /* Reciplease.xcdatamodeld */,
 			);
 			path = Model;
@@ -267,8 +279,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				ECD9F8C12209DEDF007DE7E2 /* LaunchScreen.storyboard in Resources */,
+				EC9C87952227EDC700C40452 /* Quicksand-Bold.ttf in Resources */,
+				EC9C87962227EDC700C40452 /* Quicksand-Regular.ttf in Resources */,
 				ECD9F8BE2209DEDF007DE7E2 /* Assets.xcassets in Resources */,
 				ECD9F8BC2209DEDE007DE7E2 /* Main.storyboard in Resources */,
+				EC9C87932227EDC700C40452 /* Quicksand-Light.ttf in Resources */,
+				EC9C87942227EDC700C40452 /* Quicksand-Medium.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
