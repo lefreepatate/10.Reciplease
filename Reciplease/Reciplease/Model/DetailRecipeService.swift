@@ -28,7 +28,7 @@ class DetailRecipeService {
    func getDetailImage(with stringURL : String, completion : @escaping (UIImage?, Error?) -> Void) {
       Alamofire.request(stringURL).responseImage { (response) in
          if let image = response.result.value {
-            let size = CGSize(width: 360, height: 360)
+            let size = CGSize(width: 360, height: 240 )
             let scaledImage = image.af_imageScaled(to: size)
             completion(scaledImage, nil)
          }
@@ -36,12 +36,13 @@ class DetailRecipeService {
    }
    
    private func getUrlRequest(with recipeId: String) -> URLRequest {
-      let apiURL = "http://api.yummly.com/v1/api/recipe/"
       let id = "***"
       let key = "***"
       let recipeId = recipeId
       let parameters = "\(recipeId)?_app_id=\(id)&_app_key=\(key)"
-      let url = URL(string: apiURL + parameters)!
+      let apiURL = "https://api.yummly.com/v1/api/recipe/\(parameters)"
+      let encondedString = apiURL.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)!
+      let url = URL(string: encondedString)!
       var urlRequest = URLRequest(url: url)
       urlRequest.httpMethod = "GET"
       return urlRequest

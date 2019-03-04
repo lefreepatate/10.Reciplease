@@ -12,26 +12,33 @@ import AlamofireImage
 import Alamofire
 
 class ResultsViewController: UIViewController {
+   @IBOutlet weak var emptylabel: UILabel!
    @IBOutlet weak var tableView: UITableView!
+   @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
    var recipes = [[String: Any]]()
    var recipeImage = UIImage()
-   var favorite = Favorites(context: AppDelegate.viewContext)
    
    override func viewDidLoad() {
       super.viewDidLoad()
+      toggleActivityIndicator(shown: true)
       alamofireRecipes()
    }
    private func alamofireRecipes() {
       RecipeService.shared.getRecipes { (response, error) in
          if let response = response {
-            self.recipes = response
-            self.tableView.reloadData()
+            if response.isEmpty  {
+               self.emptyResponse()
+            } else {
+               self.recipes = response
+               self.toggleActivityIndicator(shown: false)
+               self.tableView.reloadData()
+            }
          } else if let error = error {
             print("Error: \(error)")
          }
       }
    }
-   private func cellImage(with url: String) {
+   private func alamofireImage(with url: String) -> UIImage {
       RecipeService.shared.getImage(with: url) { (image, error) in
          if let image = image {
             self.recipeImage = image
@@ -39,6 +46,17 @@ class ResultsViewController: UIViewController {
             print(error)
          }
       }
+      return self.recipeImage
+   }
+   private func emptyResponse() {
+      self.emptylabel.text = "Sorry!\n\nWe didn't find any recipes for you :(\n\nTry again!"
+      self.tableView.isHidden = true
+      self.activityIndicator.isHidden = true
+   }
+   
+   private func toggleActivityIndicator(shown: Bool) {
+      tableView.isHidden = shown
+      activityIndicator.isHidden = !shown
    }
 }
 extension ResultsViewController: UITableViewDataSource {
@@ -53,29 +71,32 @@ extension ResultsViewController: UITableViewDataSource {
    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
       guard let cell = tableView.dequeueReusableCell(withIdentifier: "RecipesCell", for: indexPath)
          as? RecipesTableViewcell else { return UITableViewCell() }
-      if self.recipes.count > 0 {
-         let recipe = recipes[indexPath.row]
-         let ingredients =  recipe["ingredients"] as? [String] ?? ["ingredients"]
-         cell.recipeTitle.text = "\(recipe["recipeName"]  ?? "Titre")"
-         cell.ingredientsDescr.text = ingredients.joined(separator: ", ")
-         cell.notation.text = "\(recipe["rating"] ?? "note")"
-         cell.length.text = "\((recipe["totalTimeInSeconds"] as! Int) / 60) min"
-         if let imgURL = recipe["smallImageUrls"] as? [String] {
-            self.cellImage(with: imgURL.joined(separator: ""))
-            DispatchQueue.main.async {
-               cell.picture?.image = self.recipeImage
-            }
-         }
+      cell.picture?.image = UIImage(named: "results_img")
+      let recipe = recipes[indexPath.row]
+      let ingredients =  (recipe["ingredients"] as? [String])
+      cell.recipeTitle.text = "\(recipe["recipeName"]  ?? "Titre")"
+      cell.ingredientsDescr.text = ingredients?.joined(separator: ", ")
+      cell.notation.text = "\(recipe["rating"] ?? "note")"
+      cell.length.text = "\((recipe["totalTimeInSeconds"] as? Int ?? 0) / 60) min"
+      DispatchQueue.main.async {
+         cell.picture?.image = self.imageCellView(cellForRowAt: indexPath)
       }
       return cell
    }
+   private func imageCellView(cellForRowAt indexPath: IndexPath) -> UIImage {
+      let recipe = recipes[indexPath.row]
+      let image = (recipe["imageUrlsBySize"] as? [String:Any])
+      let imageURL = (image?["90"] as! String?)
+      let cellImage = alamofireImage(with: imageURL ?? ("first"))
+      return cellImage
+   }
+   
    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
       let storyBoard = UIStoryboard(name: "Main", bundle: nil)
       let destinationVC = storyBoard.instantiateViewController(withIdentifier: "DetailViewController")
          as! DetailViewController
       let recipe = recipes[indexPath.row]
-      destinationVC.getRecipeID = recipe["id"] as? String ?? ""
-      print(destinationVC.getRecipeID)
+      destinationVC.getRecipeID = (recipe["id"] as? String ?? "First")
       self.navigationController?.pushViewController(destinationVC, animated: true)
    }
 }

@@ -16,9 +16,9 @@ class Favorites: NSManagedObject {
       guard let favorites = try? AppDelegate.viewContext.fetch(request) else { return [] }
       return favorites
    }
-   func removeFavorite(at index: Int) {
-      if favorites.count > 0 {
-         favorites.remove(at: index)
-      }
-   }
+//   func removeFavorite(at index: Int) {
+//      if favorites.count > 0 {
+//         favorites.remove(at: index)
+//      }
+//   }
 }

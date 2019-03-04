@@ -13,8 +13,15 @@ import AlamofireImage
 class RecipeService {
    static let shared = RecipeService()
    init() {}
+   
+   // MARK: -- FAKE DATATASK FOR TESTING
+   private var session = URLSession.shared
+   init(session: URLSession) {
+      self.session = session
+   }
+   
    var ingredients: [Ingredients] = []
-
+   
    typealias WebServiceResponse = ([[String: Any]]?, Error?) -> Void
    
    func getRecipes(completion: @escaping WebServiceResponse) {
@@ -39,23 +46,24 @@ class RecipeService {
    }
    
    private func getUrlRequest() -> URLRequest {
-      let apiURL = "https://api.yummly.com/v1/api/recipes"
       let id = "***"
       let key = "***"
-      let ingredients = "\(getIngredients())"
-      let parameters = "?_app_id=\(id)&_app_key=\(key)&q=\(ingredients)"
-      let url = URL(string: apiURL + parameters)!
+      let ingredients = getIngredients()
+      let parameters = "_app_id=\(id)&_app_key=\(key)&q=\(ingredients)"
+      let apiURL = "https://api.yummly.com/v1/api/recipes?\(parameters)"
+      let encondedString = apiURL.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)!
+      let url = URL(string: encondedString)!
       var urlRequest = URLRequest(url: url)
       urlRequest.httpMethod = "GET"
       return urlRequest
    }
    
    private func getIngredients() -> String {
-      var q = ""
+      var ingredientsArray = [String]()
       for element in ingredients {
-         q += element.name + "+"
+         ingredientsArray.append(element.name)
       }
-      return q
+      return ingredientsArray.joined(separator: ", ")
    }
    func addIngredient(ingredient: Ingredients) {
       ingredients.append(ingredient)
