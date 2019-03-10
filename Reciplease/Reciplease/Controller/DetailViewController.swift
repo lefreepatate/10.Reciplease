@@ -22,25 +22,25 @@ class DetailViewController: UIViewController {
    @IBOutlet weak var titleImageview: UIView!
    @IBOutlet weak var recipeImageView: UIView!
    
-   var getRecipeID = ""
-   var recipeData: [String:Any] = [String:Any]()
-   
+   var getRecipeID = String()
+   var recipe:Detail?
+   var recipes = RecipeDetails(context: AppDelegate.viewContext)
    override func viewDidLoad() {
       super.viewDidLoad()
-      self.navigationItem.rightBarButtonItem =
-         UIBarButtonItem(title: "★", style: .plain, target: self, action: #selector(saveFavorite))
+      favoriteButtonNavigationBar()
       getRecipeDetails()
       getDesign()
    }
    @IBAction func getRecipeButton(_ sender: Any) {
-      guard let url = URL(string: getSafariURL()) else {return}
+      let stringURL = recipe?.source.sourceRecipeUrl
+      guard let url = URL(string: stringURL ?? "") else {return}
       UIApplication.shared.open(url, options: [:], completionHandler: nil)
    }
    
    func getRecipeDetails() {
       DetailRecipeService.shared.getDetail(with: getRecipeID) { (response, error) in
          if let response = response  {
-            self.recipeData = response
+            self.recipe = response
             self.setDatas()
          } else if let error = error {
             print(error)
@@ -52,51 +52,54 @@ class DetailViewController: UIViewController {
          if let image = image {
             self.recipeImage.contentMode = .scaleAspectFill
             self.recipeImage?.image = image
-            print(image)
          } else if let error = error {
             print(error)
          }
       }
    }
    @objc private func saveFavorite() {
-      guard let favoriteName = recipeTitle.text,
-         let image = recipeImage.image?.pngData(),
-         let length = recipeLenght.text,
-         let ingredients = recipeIngredients.text,
-         let rating = recipeRating.text,
-         let id = recipeData["id"] else {return}
-      
-      let favorite = Favorites(context: AppDelegate.viewContext)
-      favorite.length = length
-      favorite.rating = rating
-      favorite.image = image
-      favorite.name = favoriteName
-      favorite.ingredients = ingredients
-      favorite.id = (id as! String)
+//      guard let favoriteName = recipeTitle.text,
+//         let image = recipeImage.image?.pngData(),
+//         let length = recipeLenght.text,
+//         let ingredients = recipeIngredients.text,
+//         let rating = recipeRating.text,
+//         let id = recipe?.id else {return}
+//
+      recipes.name = recipe?.name
+      recipes.length = recipe?.totalTime
+      recipes.rating = "\(recipe?.rating ?? 0)"
+      recipes.image = recipeImage.image?.pngData()
+      recipes.ingredients = recipe?.ingredientLines.joined(separator: ", ")
+      recipes.id = recipe?.id
       navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
       try? AppDelegate.viewContext.save()
    }
-   private func getSafariURL() -> String {
-      guard let source = recipeData["source"] as! [String:Any]? else { return "" }
-      return source["sourceRecipeUrl"] as? String ?? "Source Failed"
+   
+   @objc private func deleteFavorite() {
+      for recipes in RecipeDetails.all where (getRecipeID == recipes.id) {
+         recipes.image?.removeAll()
+         AppDelegate.viewContext.delete(recipes)
+      }
+      navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
    }
+  
    func setDatas(){
-      favoriteButtonNavigationBar(on: self.recipeData["id"] as! String)
-      let images = self.recipeData["images"] as? [[String:Any]]
-      let urlImage = (images?[0]["hostedLargeUrl"] as? String)
+      let urlImage = recipe?.images[0].hostedLargeUrl
+      let ingredients = recipe?.ingredientLines.joined(separator: "\n✓ ")
       detailImage(with: urlImage ?? "detail_img")
-      recipeTitle.text = self.recipeData["name"] as? String
-      recipeIngredients?.text = (self.recipeData["ingredientLines"] as? [String])?.joined(separator: "\n")
-      recipeRating.text = "\(self.recipeData["rating"] as? Int ?? 0)"
-      recipeLenght.text = "\((self.recipeData["totalTimeInSeconds"] as? Int ?? 0) / 60) Min"
+      recipeTitle.text = recipe?.name
+      recipeIngredients?.insertText("✓ " + (ingredients ?? ""))
+      recipeRating.text = "\(recipe?.rating ?? 0)"
+      recipeLenght.text = recipe?.totalTime
    }
-   func favoriteButtonNavigationBar(on id: String) {
-      for favorite in Favorites.all {
-         if favorite.id == getRecipeID {
-            navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-         } else if favorite.id != getRecipeID {
-            navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-         }
+   func favoriteButtonNavigationBar() {
+      let barButtonSave = UIBarButtonItem(title: "★", style: .plain, target: self, action: #selector(saveFavorite))
+      let barButtonDelete = UIBarButtonItem(title: "★", style: .plain, target: self, action: #selector(deleteFavorite))
+      self.navigationItem.setRightBarButton(barButtonSave, animated: false)
+      navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+      for recipes in RecipeDetails.all where (getRecipeID == recipes.id) {
+         self.navigationItem.setRightBarButton(barButtonDelete, animated: false)
+         navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
       }
    }
 }

@@ -15,7 +15,7 @@ class ResultsViewController: UIViewController {
    @IBOutlet weak var emptylabel: UILabel!
    @IBOutlet weak var tableView: UITableView!
    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-   var recipes = [[String: Any]]()
+   var recipes = [Match]()
    var recipeImage = UIImage()
    
    override func viewDidLoad() {
@@ -24,30 +24,18 @@ class ResultsViewController: UIViewController {
       alamofireRecipes()
    }
    private func alamofireRecipes() {
-      RecipeService.shared.getRecipes { (response, error) in
-         if let response = response {
-            if response.isEmpty  {
-               self.emptyResponse()
-            } else {
-               self.recipes = response
-               self.toggleActivityIndicator(shown: false)
-               self.tableView.reloadData()
-            }
+      RecipeService.shared.getRecipes { (success, response, error) in
+         if success, let response = response {
+            self.recipes = response
+            self.toggleActivityIndicator(shown: false)
+            self.tableView.reloadData()
          } else if let error = error {
+            self.emptyResponse()
             print("Error: \(error)")
          }
       }
    }
-   private func alamofireImage(with url: String) -> UIImage {
-      RecipeService.shared.getImage(with: url) { (image, error) in
-         if let image = image {
-            self.recipeImage = image
-         } else if let error = error {
-            print(error)
-         }
-      }
-      return self.recipeImage
-   }
+
    private func emptyResponse() {
       self.emptylabel.text = "Sorry!\n\nWe didn't find any recipes for you :(\n\nTry again!"
       self.tableView.isHidden = true
@@ -73,22 +61,28 @@ extension ResultsViewController: UITableViewDataSource {
          as? RecipesTableViewcell else { return UITableViewCell() }
       cell.picture?.image = UIImage(named: "results_img")
       let recipe = recipes[indexPath.row]
-      let ingredients =  (recipe["ingredients"] as? [String])
-      cell.recipeTitle.text = "\(recipe["recipeName"]  ?? "Titre")"
-      cell.ingredientsDescr.text = ingredients?.joined(separator: ", ")
-      cell.notation.text = "\(recipe["rating"] ?? "note")"
-      cell.length.text = "\((recipe["totalTimeInSeconds"] as? Int ?? 0) / 60) min"
+      let ingredients = recipe.ingredients
+      let image = recipe.imageUrlsBySize
+      cell.recipeTitle.text = recipe.recipeName
+      cell.ingredientsDescr.text = ingredients.joined(separator: ", ")
+      cell.notation.text = "\(String(describing: recipe.rating))"
+      cell.length.text = "\(recipe.totalTimeInSeconds / 60) min"
       DispatchQueue.main.async {
-         cell.picture?.image = self.imageCellView(cellForRowAt: indexPath)
+         if let imageURL = image.the90 as String? {
+         self.imageCellView(cell: cell, url: imageURL)
+         }
       }
       return cell
    }
-   private func imageCellView(cellForRowAt indexPath: IndexPath) -> UIImage {
-      let recipe = recipes[indexPath.row]
-      let image = (recipe["imageUrlsBySize"] as? [String:Any])
-      let imageURL = (image?["90"] as! String?)
-      let cellImage = alamofireImage(with: imageURL ?? ("first"))
-      return cellImage
+   private func imageCellView(cell: RecipesTableViewcell, url: String )  {
+      RecipeService.shared.getImage(with: url) { (image, error) in
+         if let image = image {
+            self.recipeImage = image
+         } else if let error = error {
+            print(error)
+         }
+         cell.picture?.image = image
+      }
    }
    
    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -96,7 +90,7 @@ extension ResultsViewController: UITableViewDataSource {
       let destinationVC = storyBoard.instantiateViewController(withIdentifier: "DetailViewController")
          as! DetailViewController
       let recipe = recipes[indexPath.row]
-      destinationVC.getRecipeID = (recipe["id"] as? String ?? "First")
+      destinationVC.getRecipeID = recipe.id
       self.navigationController?.pushViewController(destinationVC, animated: true)
    }
 }

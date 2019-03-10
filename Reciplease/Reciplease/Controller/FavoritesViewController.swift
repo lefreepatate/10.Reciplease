@@ -12,12 +12,13 @@ class FavoritesViewController: UIViewController {
    @IBOutlet weak var tableView: UITableView!
    @IBOutlet weak var emptyLabel: UILabel!
    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-   var recipes = Favorites.all
+   var recipes = RecipeDetails.all
    override func viewWillAppear(_ animated: Bool) {
       super.viewWillAppear(animated)
-      recipes = Favorites.all
+      recipes = RecipeDetails.all
       toggleActivityIndicator(shown: true)
       checkFavorites()
+      print("Recipes", recipes.count)
       tableView.reloadData()
    }
 }
@@ -36,23 +37,16 @@ extension FavoritesViewController: UITableViewDataSource {
       let recipe = recipes[indexPath.row]
       cell.titleLbl.text = recipe.name
       cell.lengthlbl.text = recipe.length
-      cell.ingredientsLbl.text = recipe.ingredients
+      cell.ingredientsLbl.text = recipe.ingredients?.replacingOccurrences(of: "✓", with: "")
       cell.ratingLbl.text = recipe.rating
-      if let image = UIImage(data: recipe.image!) {
+      if let image = recipe.image {
          DispatchQueue.main.async {
             cell.recipeImg.contentMode = .scaleAspectFit
-            cell.recipeImg.image = image
+            cell.recipeImg.image = UIImage(data: image)
          }
       }
       return cell
    }
-   
-   func favoriteImageCell(on image: UIImage) -> UIImage {
-      let size = CGSize(width: 110, height: 110)
-      let scaledImage = image.af_imageScaled(to: size)
-      return scaledImage
-   }
-   
    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
       let storyBoard = UIStoryboard(name: "Main", bundle: nil)
       let destinationVC = storyBoard.instantiateViewController(withIdentifier: "DetailViewController")
@@ -69,7 +63,7 @@ extension FavoritesViewController: UITableViewDataSource {
       }
    }
    private func emptyResponse() {
-      self.emptyLabel.text = "Hey! You don't have any favorites yet.\n\nTo get favorites press the ★ button\non the top right corner ;)"
+      self.emptyLabel.text = "Hey! You don't have any favorites yet.\n\nTo get favorites\npress the ★ button\non the top right corner\n;)"
       self.tableView.isHidden = true
       self.activityIndicator.isHidden = true
    }
@@ -80,11 +74,16 @@ extension FavoritesViewController: UITableViewDataSource {
    }
 }
 extension FavoritesViewController: UITableViewDelegate {
+   
    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-      if editingStyle == .delete {
+      if editingStyle == .delete && recipes.count > 0 {
          recipes.remove(at: indexPath.row)
          tableView.deleteRows(at: [indexPath], with: .middle)
-         try? AppDelegate.viewContext.save()
+         AppDelegate.viewContext.delete(recipes[indexPath.row])
       }
+      if recipes.count == 0 {
+         emptyResponse()
+      }
+      try? AppDelegate.viewContext.save()
    }
 }

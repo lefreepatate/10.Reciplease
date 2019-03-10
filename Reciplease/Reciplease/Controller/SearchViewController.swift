@@ -27,7 +27,7 @@ class SearchViewController: UIViewController {
    }
    override func viewDidLoad() {
       super.viewDidLoad()
-      ingredientsList.text = "Salad, bacon, tomatoe"
+      ingredientsList.text = "tomatoe\nBacon"
       getDesign()
    }
    @IBAction func addIngredientTappedButton(_ sender: UIButton) {

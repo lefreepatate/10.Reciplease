@@ -14,14 +14,18 @@ class DetailRecipeService {
    static let shared = DetailRecipeService()
    init() {}
    
-   typealias WebServiceResponse = ([String:Any]?, Error?) -> Void
+   typealias WebServiceResponse = (Detail?, Error?) -> Void
    
    func getDetail(with recipeId: String, completion: @escaping WebServiceResponse) {
       let urlRequest = getUrlRequest(with: recipeId)
       Alamofire.request(urlRequest).responseJSON { (response) in
-         if let jsonArray = response.result.value as? [String:Any] {
-            completion(jsonArray, nil)
-            }
+         guard let data = response.data, response.error == nil
+            else { print("data error")
+               return  completion(nil, response.error) }
+         guard let detail = try? JSONDecoder().decode(Detail.self, from: data)
+            else { print("json error")
+               return completion(nil, response.error) }
+         completion(detail, nil)
       }
    }
    

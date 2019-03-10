@@ -24,20 +24,14 @@ class FavoriteTableViewCell: UITableViewCell {
       super.setSelected(selected, animated: animated)
    }
    func getDesign() {
-//      listView.layer.borderWidth = 1
-//      listView.layer.borderColor = #colorLiteral(red: 0.1503180861, green: 1, blue: 0.4878128767, alpha: 1)
-//      listView.layer.cornerRadius = listView.frame.width/16
       lengthlbl.clipsToBounds = true
       lengthlbl.layer.cornerRadius = lengthlbl.frame.height/2
-//      clearButton.layer.cornerRadius = clearButton.frame.height/2
       ratingLbl.layer.cornerRadius = 4
       ratingLbl.clipsToBounds = true
       recipeImg.layer.borderWidth = 1
       recipeImg.layer.borderColor = #colorLiteral(red: 0.1503180861, green: 1, blue: 0.4878128767, alpha: 1)
-      recipeImg.layer.cornerRadius = recipeImg.frame.height/4
+      recipeImg.layer.cornerRadius = recipeImg.frame.height/8
       recipeImg.clipsToBounds = true
-//      clearButton.clipsToBounds = true
-//      addButton.clipsToBounds = true
    }
 }
 

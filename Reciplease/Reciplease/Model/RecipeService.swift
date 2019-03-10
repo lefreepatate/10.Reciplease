@@ -19,20 +19,25 @@ class RecipeService {
    init(session: URLSession) {
       self.session = session
    }
-   
    var ingredients: [Ingredients] = []
+   typealias WebServiceResponse = (Bool, [Match]?, String?) -> Void
    
-   typealias WebServiceResponse = ([[String: Any]]?, Error?) -> Void
-   
-   func getRecipes(completion: @escaping WebServiceResponse) {
+   func getRecipes(callback: @escaping WebServiceResponse) {
       let urlRequest = getUrlRequest()
-      Alamofire.request(urlRequest).responseJSON { response in
-         if let jsonArray = response.result.value as? [String: Any] {
-            if let recipeResponse = jsonArray["matches"] as? [[String: Any]] {
-               completion(recipeResponse, nil)
+      Alamofire.request(urlRequest).responseJSON { (response) in
+            guard let data = response.data, response.error == nil else {
+               callback(false, nil,  "Error while fetching data")
+               return
             }
+            guard let recipes = try? JSONDecoder().decode(Recipe.self, from: data) else {
+               return callback(false, nil, response.error.debugDescription)
+               }
+            if recipes.matches.isEmpty {
+               callback(false, nil, "Aucune recette")
+               return
+            }
+            callback(true, recipes.matches, nil)
          }
-      }
    }
    
    func getImage(with stringURL : String, completion : @escaping (UIImage?, Error?) -> Void) {
@@ -68,10 +73,11 @@ class RecipeService {
    func addIngredient(ingredient: Ingredients) {
       ingredients.append(ingredient)
    }
-   func removeIngredient(at index: Int) {
-      if ingredients.count > 0 {
-         ingredients.remove(at: index)
-      }
-   }
+   //   func removeIngredient(at index: Int) {
+   //      if ingredients.count > 0 {
+   //         ingredients.remove(at: index)
+   //      }
+   //   }
    
 }
+
