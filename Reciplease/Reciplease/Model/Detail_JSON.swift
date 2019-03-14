@@ -27,30 +27,17 @@ struct Detail: Decodable {
       case rating = "rating"
    }
 }
-
 struct Image: Decodable {
-   let hostedSmallUrl: String
-   let hostedMediumUrl: String
    let hostedLargeUrl: String
-   let imageUrlsBySize: [String: String]
    
    enum CodingKeys: String, CodingKey {
-      case hostedSmallUrl = "hostedSmallUrl"
-      case hostedMediumUrl = "hostedMediumUrl"
       case hostedLargeUrl = "hostedLargeUrl"
-      case imageUrlsBySize = "imageUrlsBySize"
    }
 }
-
-
 struct Source: Decodable {
-   let sourceDisplayName: String
-   let sourceSiteUrl: String
    let sourceRecipeUrl: String
    
    enum CodingKeys: String, CodingKey {
-      case sourceDisplayName = "sourceDisplayName"
-      case sourceSiteUrl = "sourceSiteUrl"
       case sourceRecipeUrl = "sourceRecipeUrl"
    }
 }

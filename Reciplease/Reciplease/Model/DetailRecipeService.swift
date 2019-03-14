@@ -20,11 +20,9 @@ class DetailRecipeService {
       let urlRequest = getUrlRequest(with: recipeId)
       Alamofire.request(urlRequest).responseJSON { (response) in
          guard let data = response.data, response.error == nil
-            else { print("data error")
-               return  completion(nil, response.error) }
+            else { return  completion(nil, response.error) }
          guard let detail = try? JSONDecoder().decode(Detail.self, from: data)
-            else { print("json error")
-               return completion(nil, response.error) }
+            else { return completion(nil, response.error) }
          completion(detail, nil)
       }
    }
@@ -49,6 +47,7 @@ class DetailRecipeService {
       let url = URL(string: encondedString)!
       var urlRequest = URLRequest(url: url)
       urlRequest.httpMethod = "GET"
+      print(urlRequest)
       return urlRequest
    }
 }

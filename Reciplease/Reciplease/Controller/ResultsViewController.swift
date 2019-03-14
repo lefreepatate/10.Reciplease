@@ -24,8 +24,8 @@ class ResultsViewController: UIViewController {
       alamofireRecipes()
    }
    private func alamofireRecipes() {
-      RecipeService.shared.getRecipes { (success, response, error) in
-         if success, let response = response {
+      RecipeService.shared.getRecipes { (response, error) in
+         if let response = response {
             self.recipes = response
             self.toggleActivityIndicator(shown: false)
             self.tableView.reloadData()

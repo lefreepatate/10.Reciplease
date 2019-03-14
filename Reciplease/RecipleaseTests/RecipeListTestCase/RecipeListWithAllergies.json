@@ -1,0 +1,355 @@
+{
+   "criteria": {
+      "q": "Salad Tomatoe, Bacon ",
+      "allowedAllergy": "Tree Nut Gluten Seafood ",
+      "allowedIngredient": null,
+      "excludedIngredient": null
+   },
+   "matches": [
+      {
+         "imageUrlsBySize": {
+            "90": "https://lh3.googleusercontent.com/1Dngr8Ida9wEFkqwklQJ7LG7jhqAzk8Z6Un4Esr-56Vp_xD7amlF70sS_TkjYbRyiLkeh6Eb0MLUPUdb3mNBLA=s90-c"
+         },
+         "sourceDisplayName": "A Sweet Life",
+         "ingredients": [
+            "bacon",
+            "cherry tomato",
+            "cucumbers",
+            "mayonnaise",
+            "garlic clove",
+            "salt",
+            "pepper"
+         ],
+         "id": "Bacon-Cucumber-and-Tomato-Salad-2472012",
+         "smallImageUrls": [
+            "https://lh3.googleusercontent.com/mcLkAFAbQXOCeVOTKoXfJAJS3FGn17EDdg0bkO2CXNy6fp3VX1TlCUtUkBJ3KV9EYBSmvWw1WZJKFeVQjSP9=s90"
+         ],
+         "recipeName": "Bacon Cucumber and Tomato Salad",
+         "totalTimeInSeconds": 1800,
+         "attributes": {
+            "course": [
+               "Salads"
+            ],
+            "holiday": [
+               "Summer"
+            ]
+         },
+         "flavors": {
+            "piquant": 0,
+            "meaty": 0.16666666666666666,
+            "bitter": 0.16666666666666666,
+            "sweet": 0.16666666666666666,
+            "sour": 0.3333333333333333,
+            "salty": 0.5
+         },
+         "rating": 4
+      },
+      {
+         "imageUrlsBySize": {
+            "90": "https://lh3.googleusercontent.com/OYuijQqqncgRB4AfsvKtmul2r6hr1BlXRnSJeMzt0YyH9cAXe6bwZnrjnhXgFEx6iLC-QgqmzMTSrwwpmXIrYw=s90-c"
+         },
+         "sourceDisplayName": "Christopher James Clark",
+         "ingredients": [
+            "avocados",
+            "cherry tomatoes",
+            "purple onion",
+            "balsamic vinegar",
+            "olive oil",
+            "fresh basil leaves"
+         ],
+         "id": "Bacon-Avocado-Tomato-Salad-2675292",
+         "smallImageUrls": [
+            "https://lh3.googleusercontent.com/5VpsNzCu_b4mvvP2Sm_-pEybYBgL4qxpqgohbIClJgSqZepfmJQi5x_nmXmVkVYtKkn326Btdlyj5Dk3e6MiZA=s90"
+         ],
+         "recipeName": "Bacon Avocado Tomato Salad",
+         "totalTimeInSeconds": 1500,
+         "attributes": {
+            "course": [
+               "Salads"
+            ]
+         },
+         "flavors": null,
+         "rating": 3
+      },
+      {
+         "imageUrlsBySize": {
+            "90": "https://lh3.googleusercontent.com/TlWDH7gCKUNe3iLWiK86YHvzM3viPwvxnxO2Z81U-IOb4m6qcAjbQBt357U0-C_ALwK90Z5cHRMRiiD0vZUlBSU=s90-c"
+         },
+         "sourceDisplayName": "Mark's Daily Apple",
+         "ingredients": [
+            "avocado",
+            "boiled eggs",
+            "tomato",
+            "lemon wedge",
+            "bacon",
+            "salt",
+            "pepper"
+         ],
+         "id": "Bacon_-Egg_-Avocado-and-Tomato-Salad-2624913",
+         "smallImageUrls": [
+            "https://lh3.googleusercontent.com/z25w4Rl5p_9rS-6EXPG1IBEMkHBjcxtbFTYfvQwCBc8UwWm6uTliA1Tpj4BzCBTCrvDEALyI1-sZ8D67sj5wLA=s90"
+         ],
+         "recipeName": "Bacon, Egg, Avocado and Tomato Salad",
+         "totalTimeInSeconds": 900,
+         "attributes": {
+            "course": [
+               "Breakfast and Brunch",
+               "Salads"
+            ]
+         },
+         "flavors": {
+            "piquant": 0,
+            "meaty": 0.16666666666666666,
+            "bitter": 0.8333333333333334,
+            "sweet": 0.16666666666666666,
+            "sour": 0.8333333333333334,
+            "salty": 0.5
+         },
+         "rating": 4
+      },
+      {
+         "imageUrlsBySize": {
+            "90": "http://lh4.ggpht.com/H4IW0aKeJatXeKD1_b2gFiMMgahJ3UvLxiv6AwcgnrsNBPY3Mit0c-j6WqDnScYegGMZe5x9tfJDZM1yRal2SA=s90-c"
+         },
+         "sourceDisplayName": "Barefeet In The Kitchen",
+         "ingredients": [
+            "small shell pasta",
+            "avocado",
+            "grape tomatoes",
+            "bacon",
+            "ranch dip"
+         ],
+         "id": "Bacon-Avocado-Tomato-Pasta-Salad-1035560",
+         "smallImageUrls": [
+            "http://lh3.ggpht.com/2q1RWnHU56JlDNstQ5KIrGYunCkzP1tbh6EkHjHaTPkJx2kFh-_N5QyqFFS1jr2la9Me0QhwCEr4ShLkLe56=s90"
+         ],
+         "recipeName": "Bacon Avocado Tomato Pasta Salad",
+         "totalTimeInSeconds": 1200,
+         "attributes": {
+            "course": [
+               "Salads"
+            ]
+         },
+         "flavors": {
+            "piquant": 0,
+            "meaty": 0.8333333333333334,
+            "bitter": 0.8333333333333334,
+            "sweet": 0.16666666666666666,
+            "sour": 0.3333333333333333,
+            "salty": 0.8333333333333334
+         },
+         "rating": 4
+      },
+      {
+         "imageUrlsBySize": {
+            "90": "http://lh3.googleusercontent.com/_45R9bkV_25DGEX_4KeOuebOtj2VDKgIUlEl11Ymgk3AS6go2AEYiX2SbfgVfwWmuCYt9HgNCg3tjJ5daET8=s90-c"
+         },
+         "sourceDisplayName": "Peanut Butter and Peppers",
+         "ingredients": [
+            "tomatoes",
+            "Haas avocado",
+            "bacon",
+            "basil",
+            "olive oil",
+            "salt",
+            "ground pepper"
+         ],
+         "id": "Tomato_-Avocado-and-Bacon-Salad-1166314",
+         "smallImageUrls": [
+            "http://lh3.googleusercontent.com/8Hg1xH0t66q6PbkZqj4KEtpbXRjYXQQEQ-9B8liIvqszHV1Ig04Yi0m-V7nP2wBCeTlPYNjsEW3TEUJfI3EBzg=s90"
+         ],
+         "recipeName": "Tomato, Avocado and Bacon Salad",
+         "totalTimeInSeconds": 600,
+         "attributes": {
+            "course": [
+               "Salads"
+            ]
+         },
+         "flavors": {
+            "piquant": 0.16666666666666666,
+            "meaty": 0.16666666666666666,
+            "bitter": 0.6666666666666666,
+            "sweet": 0.16666666666666666,
+            "sour": 0.6666666666666666,
+            "salty": 0.16666666666666666
+         },
+         "rating": 4
+      },
+      {
+         "imageUrlsBySize": {
+            "90": "https://lh3.googleusercontent.com/s_5JaSPo4UDPRtBgsLXiiZ1Iu4QfG2PkCWf6nJOyv4UxcucgoF_GEm87tjHKk6SECpODse_SvxSXttOApzSKhuY=s90-c"
+         },
+         "sourceDisplayName": "Mommy? I'm Hungry!",
+         "ingredients": [
+            "avocado",
+            "boiled eggs",
+            "tomato",
+            "bacon",
+            "salt",
+            "pepper",
+            "lemon wedge"
+         ],
+         "id": "Bacon_-Egg_-Avocado-and-Tomato-Salad-1456459",
+         "smallImageUrls": [
+            "https://lh3.googleusercontent.com/yModRJMXu2UyghrHh7tOtQ5pc735tvzcVSpadKPxbxFdKyRYxOoSPyxmbfDQOGKFIkhj49d__rN2DkFWpqnw=s90"
+         ],
+         "recipeName": "Bacon, Egg, Avocado and Tomato Salad",
+         "totalTimeInSeconds": 900,
+         "attributes": {
+            "course": [
+               "Breakfast and Brunch",
+               "Salads"
+            ]
+         },
+         "flavors": {
+            "piquant": 0,
+            "meaty": 0.16666666666666666,
+            "bitter": 0.8333333333333334,
+            "sweet": 0.16666666666666666,
+            "sour": 0.8333333333333334,
+            "salty": 0.5
+         },
+         "rating": 4
+      },
+      {
+         "imageUrlsBySize": {
+            "90": "http://lh4.ggpht.com/q-GheLhNfFClhb6XDOppA3g74iYl0PDDdpFlH2R1ngSoN4N-4rkVUfg2EOmqWZ989HiMKoqTOyAvl7V6Ds1DZsc=s90-c"
+         },
+         "sourceDisplayName": "Eating Well",
+         "ingredients": [
+            "farro",
+            "center cut bacon",
+            "shallot",
+            "white wine vinegar",
+            "salt",
+            "freshly ground pepper",
+            "cherry tomatoes",
+            "fresh basil"
+         ],
+         "id": "Bacon_-Tomato-_-Farro-Salad-578390",
+         "smallImageUrls": [
+            "http://lh3.ggpht.com/LP4anN5YM0nCB5K6hp1dkGIUibWjWMjKBiBUbZKk5Vgrr8lTMdjkam-dWKUxNogDeiC2MENozh50eii1ILUS=s90"
+         ],
+         "recipeName": "Bacon, Tomato & Farro Salad",
+         "totalTimeInSeconds": 1800,
+         "attributes": {},
+         "flavors": {
+            "sweet": 0.16666666666666666,
+            "piquant": 0.16666666666666666,
+            "sour": 0.5,
+            "salty": 0.16666666666666666,
+            "meaty": 0.16666666666666666,
+            "bitter": 0.6666666666666666
+         },
+         "rating": 4
+      },
+      {
+         "imageUrlsBySize": {
+            "90": "https://lh3.googleusercontent.com/gJ_ZRkvIc8EOw03qXE4OIfzSd_y90aIijXBZSSlGEA9tXxVCEB9c-7aRK8cIwWcyjYxSEf1QcEmPlmPgTDEH=s90-c"
+         },
+         "sourceDisplayName": "Sparkles To Sprinkles",
+         "ingredients": [
+            "cucumbers",
+            "tomatoes",
+            "bacon",
+            "mayonnaise",
+            "garlic powder",
+            "salt",
+            "pepper"
+         ],
+         "id": "BCT-Bacon-Cucumber-Tomato-Salad-1733731",
+         "smallImageUrls": [
+            "https://lh3.googleusercontent.com/5Ng2WfrPiPKbfHBF1Ez3x7lFIyUJHqh914pa2Cz8Jw2JnFMaPy6MdWM9G2hM9Epb4OSRi5xQ2AYhw_abKUKs=s90"
+         ],
+         "recipeName": "BCT Bacon Cucumber Tomato Salad",
+         "totalTimeInSeconds": 720,
+         "attributes": {
+            "course": [
+               "Salads"
+            ]
+         },
+         "flavors": {
+            "piquant": 0,
+            "meaty": 0.16666666666666666,
+            "bitter": 0.3333333333333333,
+            "sweet": 0.16666666666666666,
+            "sour": 0.5,
+            "salty": 0.6666666666666666
+         },
+         "rating": 4
+      },
+      {
+         "imageUrlsBySize": {
+            "90": "http://lh3.googleusercontent.com/-a4uIoMow0caW23raasi9wmeHKWFnwQZsNY5WxZEBgj3De-77pVgKgS0-LFHP6yiSCtpUk7Elc7LiAKt_rljkg=s90-c"
+         },
+         "sourceDisplayName": "Fresno Flavor",
+         "ingredients": [
+            "thick-cut bacon",
+            "onion",
+            "ears of corn",
+            "cherry tomatoes",
+            "fresh basil",
+            "cider vinegar",
+            "salt",
+            "ground black pepper"
+         ],
+         "id": "Sweet-Corn_-Bacon_-and-Tomato-Salad-1250973",
+         "smallImageUrls": [
+            "http://lh3.googleusercontent.com/WIvYjWBasL2a82kbE1w0JZnZscWL6wdSCnHQ5SV1XDTmgmSkfQ1FlpV-nBZAlnKum2KuoaCJClcRaghkskePuQ=s90"
+         ],
+         "recipeName": "Sweet Corn, Bacon, and Tomato Salad",
+         "totalTimeInSeconds": 2100,
+         "attributes": {
+            "course": [
+               "Salads"
+            ]
+         },
+         "flavors": null,
+         "rating": 4
+      },
+      {
+         "imageUrlsBySize": {
+            "90": "http://lh3.ggpht.com/hqXwa94sB1oSVChNjuk6u8gIXvfm7o6-sq_zAIT7a-3nV6rronhUxg8snkaEmSH3fnpa66f6CdgImoD2aFRu=s90-c"
+         },
+         "sourceDisplayName": "Mark's Daily Apple",
+         "ingredients": [
+            "avocado",
+            "boiled eggs",
+            "tomato",
+            "lemon wedge",
+            "bacon",
+            "salt",
+            "pepper"
+         ],
+         "id": "Bacon_-Egg_-Avocado-and-Tomato-Salad-772353",
+         "smallImageUrls": [
+            "http://lh6.ggpht.com/tuNf78ngbNhufk3iXcFf5W-YgSDoWNANPkf1R-UZo9m_8qzd8XD6vsmAyK2uktffwtZAxjnMJ65Yhfil6Mks=s90"
+         ],
+         "recipeName": "Bacon, Egg, Avocado and Tomato Salad",
+         "totalTimeInSeconds": 900,
+         "attributes": {
+            "course": [
+               "Breakfast and Brunch",
+               "Salads"
+            ]
+         },
+         "flavors": {
+            "piquant": 0,
+            "meaty": 0.16666666666666666,
+            "bitter": 0.8333333333333334,
+            "sweet": 0.16666666666666666,
+            "sour": 0.8333333333333334,
+            "salty": 0.5
+         },
+         "rating": 4
+      }
+   ],
+   "facetCounts": {},
+   "totalMatchCount": 3370,
+   "attribution": {
+      "html": "Recipe search powered by <a href='http://www.yummly.co/recipes'><img alt='Yummly' src='https://static.yummly.co/api-logo.png'/></a>",
+      "url": "http://www.yummly.co/recipes/",
+      "text": "Recipe search powered by Yummly",
+      "logo": "https://static.yummly.co/api-logo.png"
+   }
+}

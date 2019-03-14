@@ -21,16 +21,18 @@ class DetailViewController: UIViewController {
    @IBOutlet weak var recipeDetailsButton: UIButton!
    @IBOutlet weak var titleImageview: UIView!
    @IBOutlet weak var recipeImageView: UIView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
    
    var getRecipeID = String()
    var recipe:Detail?
-   var recipes = RecipeDetails(context: AppDelegate.viewContext)
    override func viewDidLoad() {
       super.viewDidLoad()
+      toggleActivityIndicator(shown: true)
       favoriteButtonNavigationBar()
       getRecipeDetails()
       getDesign()
    }
+   
    @IBAction func getRecipeButton(_ sender: Any) {
       let stringURL = recipe?.source.sourceRecipeUrl
       guard let url = URL(string: stringURL ?? "") else {return}
@@ -42,6 +44,7 @@ class DetailViewController: UIViewController {
          if let response = response  {
             self.recipe = response
             self.setDatas()
+            self.toggleActivityIndicator(shown: false)
          } else if let error = error {
             print(error)
          }
@@ -58,13 +61,7 @@ class DetailViewController: UIViewController {
       }
    }
    @objc private func saveFavorite() {
-//      guard let favoriteName = recipeTitle.text,
-//         let image = recipeImage.image?.pngData(),
-//         let length = recipeLenght.text,
-//         let ingredients = recipeIngredients.text,
-//         let rating = recipeRating.text,
-//         let id = recipe?.id else {return}
-//
+      let recipes = RecipeDetails(context: AppDelegate.viewContext)
       recipes.name = recipe?.name
       recipes.length = recipe?.totalTime
       recipes.rating = "\(recipe?.rating ?? 0)"
@@ -72,17 +69,19 @@ class DetailViewController: UIViewController {
       recipes.ingredients = recipe?.ingredientLines.joined(separator: ", ")
       recipes.id = recipe?.id
       navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+      favoriteButtonNavigationBar()
       try? AppDelegate.viewContext.save()
    }
    
    @objc private func deleteFavorite() {
-      for recipes in RecipeDetails.all where (getRecipeID == recipes.id) {
-         recipes.image?.removeAll()
-         AppDelegate.viewContext.delete(recipes)
+      for recipe in RecipeDetails.all where (getRecipeID == recipe.id) {
+         recipe.image = nil
+         AppDelegate.viewContext.delete(recipe)
       }
-      navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+      favoriteButtonNavigationBar()
+      try? AppDelegate.viewContext.save()
    }
-  
+   
    func setDatas(){
       let urlImage = recipe?.images[0].hostedLargeUrl
       let ingredients = recipe?.ingredientLines.joined(separator: "\n✓ ")
@@ -101,6 +100,17 @@ class DetailViewController: UIViewController {
          self.navigationItem.setRightBarButton(barButtonDelete, animated: false)
          navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
       }
+   }
+   private func toggleActivityIndicator(shown: Bool) {
+      recipeImage.isHidden = shown
+      recipeIngredients.isHidden = shown
+      recipeRating.isHidden = shown
+      recipeLenght.isHidden = shown
+      recipeDetailsButton.isHidden = shown
+      titleImageview.isHidden = shown
+      recipeImageView.isHidden = shown
+      recipeIngredients.isHidden = shown
+      activityIndicator.isHidden = !shown
    }
 }
 extension DetailViewController {

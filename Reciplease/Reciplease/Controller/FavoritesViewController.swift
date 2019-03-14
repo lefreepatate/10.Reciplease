@@ -47,6 +47,7 @@ extension FavoritesViewController: UITableViewDataSource {
       }
       return cell
    }
+   
    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
       let storyBoard = UIStoryboard(name: "Main", bundle: nil)
       let destinationVC = storyBoard.instantiateViewController(withIdentifier: "DetailViewController")
@@ -55,6 +56,7 @@ extension FavoritesViewController: UITableViewDataSource {
       destinationVC?.getRecipeID = recipe.id ?? ""
       self.navigationController?.pushViewController(destinationVC!, animated: true)
    }
+   
    private func checkFavorites() {
       if recipes.isEmpty {
          emptyResponse()
@@ -62,6 +64,7 @@ extension FavoritesViewController: UITableViewDataSource {
          toggleActivityIndicator(shown: false)
       }
    }
+   
    private func emptyResponse() {
       self.emptyLabel.text = "Hey! You don't have any favorites yet.\n\nTo get favorites\npress the ★ button\non the top right corner\n;)"
       self.tableView.isHidden = true
@@ -77,9 +80,8 @@ extension FavoritesViewController: UITableViewDelegate {
    
    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
       if editingStyle == .delete && recipes.count > 0 {
-         recipes.remove(at: indexPath.row)
+         AppDelegate.viewContext.delete(recipes.remove(at: indexPath.row))
          tableView.deleteRows(at: [indexPath], with: .middle)
-         AppDelegate.viewContext.delete(recipes[indexPath.row])
       }
       if recipes.count == 0 {
          emptyResponse()

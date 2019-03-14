@@ -15,7 +15,6 @@ struct Recipe: Decodable {
       case matches = "matches"
    }
 }
-
 struct Match: Decodable {
    let imageUrlsBySize: ImageUrlsBySize
    let sourceDisplayName: String

@@ -11,3 +11,7 @@ import Foundation
 struct Ingredients {
    var name = String()
 }
+
+struct Allergies {
+   var name = String()
+}
