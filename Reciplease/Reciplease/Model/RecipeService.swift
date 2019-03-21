@@ -10,34 +10,33 @@ import Foundation
 import Alamofire
 import AlamofireImage
 
+class RealNetworkRequest: NetworkRequest {
+   func getRequest(_ url: URL, completion: @escaping ([Match]?, Error?) -> Void) {
+      Alamofire.request(url).responseJSON { (response) in
+         guard let data = response.data, response.error == nil else { return }
+         guard let recipes = try? JSONDecoder().decode(Recipe.self, from: data) else { return }
+         completion(recipes.matches, nil)
+      }
+   }
+}
+
 class RecipeService {
+   
    static let shared = RecipeService()
-   init() {}
    
    // MARK: -- FAKE DATATASK FOR TESTING
-   private var session = URLSession.shared
-   init(session: URLSession) {
-      self.session = session
+   let networkRequest: NetworkRequest
+   init(_ networkRequest: NetworkRequest = RealNetworkRequest()) {
+      self.networkRequest = networkRequest
    }
    
    var ingredientsArray = [Ingredients]()
    var allergiesArray = [Allergies]()
-   typealias WebServiceResponse = ([Match]?, Error?) -> Void
    
-   func getRecipes(completion: @escaping WebServiceResponse) {
+   func getRecipes(completion: @escaping ([Match]?, Error?) -> Void) {
       let urlRequest = getUrlRequest()
-      Alamofire.request(urlRequest).responseJSON { (response) in
-         print(response)
-         guard let data = response.data, response.error == nil
-            else { return  completion(nil, response.error) }
-         guard let recipes = try? JSONDecoder().decode(Recipe.self, from: data)
-            else { return  completion(nil, response.error) }
-
-         if recipes.matches.isEmpty {
-            return completion(nil, response.error)
-         }
-        return completion(recipes.matches, nil)
-         
+      networkRequest.getRequest(urlRequest) { (response, error) in
+         completion(response, nil)
       }
    }
    
@@ -51,7 +50,7 @@ class RecipeService {
       }
    }
    
-   private func getUrlRequest() -> URLRequest {
+   private func getUrlRequest() -> URL {
       let id = "***"
       let key = "***"
       let allergies = getAllergies()
@@ -60,10 +59,7 @@ class RecipeService {
       let apiURL = "https://api.yummly.com/v1/api/recipes?\(parameters)"
       let encondedString = apiURL.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)!
       let url = URL(string: encondedString)!
-      var urlRequest = URLRequest(url: url)
-      urlRequest.httpMethod = "GET"
-      print("urlrequest:", urlRequest)
-      return urlRequest
+      return url
    }
    
    private func getIngredients() -> String {

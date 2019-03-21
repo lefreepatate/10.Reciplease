@@ -47,7 +47,6 @@ class DetailRecipeService {
       let url = URL(string: encondedString)!
       var urlRequest = URLRequest(url: url)
       urlRequest.httpMethod = "GET"
-      print(urlRequest)
       return urlRequest
    }
 }

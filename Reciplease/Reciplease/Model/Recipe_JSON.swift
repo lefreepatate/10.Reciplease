@@ -9,7 +9,7 @@
 import Foundation
 
 struct Recipe: Decodable {
-   var matches: [Match]
+   var matches: [Match]?
    
    enum CodingKeys: String, CodingKey {
       case matches = "matches"

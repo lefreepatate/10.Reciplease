@@ -8,27 +8,25 @@
 
 import XCTest
 import Alamofire
+import CoreData
 @testable import Reciplease
 
 class RecipeServiceTestCase: XCTestCase {
-   var ingredient: Ingredients!
+   var ingredient = Ingredients()
    var allergie = Allergies()
-   var recipes: [Match]?
-   var recipeService:RecipeService!
-   var success: Bool!
-   let expectation = XCTestExpectation(description: "Wait for queue change")
+   var recipes: [Match]!
+   var recipeService: RecipeService!
    
+   let expectation = XCTestExpectation(description: "Wait for queue change")
    override func setUp() {
       super.setUp()
-      ingredient = Ingredients()
       recipeService = RecipeService()
-      success = Bool()
    }
    
-   func getRecipesSession(data sessionData: Foundation.Data?, response: URLResponse?, error: Error?){
-      recipeService = RecipeService(session: URLSessionFake(data: sessionData, response: response, error: error))
+   func getRecipesSession(data sessionData: Foundation.Data?, response: HTTPURLResponse?, error: Error?){
+      recipeService = RecipeService(FakeNetworkRequest(data: sessionData, response: response, error: error))
+      self.expectation.fulfill()
    }
-   
    
    func testGivenIngredientsIsEmptyWhenAddingIngredientThenIngredientHave1More() {
       // Given
@@ -52,7 +50,6 @@ class RecipeServiceTestCase: XCTestCase {
       recipeService.ingredientsArray.append(ingredient)
       
       getRecipesSession(data: nil, response: nil, error: FakeListResponseData.error)
-      XCTAssertFalse(success)
       XCTAssertNil(recipes)
    }
    func testRecipeServiceShouldPostFailedCallbackIfNoData() {
@@ -61,26 +58,32 @@ class RecipeServiceTestCase: XCTestCase {
       recipeService.ingredientsArray.append(ingredient)
       
       getRecipesSession(data: nil, response: nil, error: nil)
-      XCTAssertFalse(success)
       XCTAssertNil(recipes)
    }
    func testRecipeServiceShouldPostFailedCallbackIfIncorrectResponse() {
       // Given
       getRecipesSession(data: FakeListResponseData.incorrectRecipeData,
                         response: FakeListResponseData.responseOK, error: nil)
-      XCTAssertFalse(success)
       XCTAssertNil(recipes)
    }
    func testRecipeServiceShouldSuccessCallbackIfCorrectData() {
-      getRecipesSession(data: FakeListResponseData.recipeCorrectData, response: FakeListResponseData.responseOK, error: nil)
       // Given
-      ingredient.name = "Salad Tomatoe, Bacon "
-      recipeService.ingredientsArray.append(ingredient)
-      recipeService.getRecipes { (response, error) in
-         XCTAssertTrue(self.success)
-         XCTAssertNotNil(response)
-         self.expectation.fulfill()
+      getRecipesSession(data: FakeListResponseData.recipeCorrectData, response: FakeListResponseData.responseOK, error: nil)
+      recipeService.getRecipes { (recipes, error) in
+         XCTAssertNotNil(recipes)
       }
-      self.expectation.fulfill()
+      wait(for: [expectation], timeout: 0.05)
+   }
+   func testRecipeServiceShouldSuccessCallbackResponseEqualsTrue() {
+      // Given
+      let expectation = XCTestExpectation(description: "Wait for queue change")
+      getRecipesSession(data: FakeListResponseData.recipeCorrectData, response: FakeListResponseData.responseOK, error: nil)      
+      recipeService.getRecipes { (response, error) in
+         XCTAssertNotNil(response)
+         XCTAssertNil(error)
+         XCTAssertEqual(response![0].recipeName, "Bacon Cucumber and Tomato Salad")
+         expectation.fulfill()
+      }
+      wait(for: [expectation], timeout: 0.05)
    }
 }

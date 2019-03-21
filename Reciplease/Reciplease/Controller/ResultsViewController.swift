@@ -31,7 +31,7 @@ class ResultsViewController: UIViewController {
             self.tableView.reloadData()
          } else if let error = error {
             self.emptyResponse()
-            print("Error: \(error)")
+            print(error)
          }
       }
    }
