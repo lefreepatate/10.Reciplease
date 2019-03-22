@@ -21,10 +21,7 @@ class AllergiesViewController: UIViewController {
    override func viewDidLoad() {
       super.viewDidLoad()
       refreshAllergies()
-      backgroundView.layer.cornerRadius = 10
-      backgroundView.clipsToBounds = true
-      doneButton.layer.cornerRadius = 10
-      doneButton.clipsToBounds = true
+      getDesign()
    }
    
    var allergies = Allergies()
@@ -46,11 +43,11 @@ class AllergiesViewController: UIViewController {
    private func refreshAllergies() {
       for allergyList in RecipeService.shared.allergiesArray {
          for button in radioButtonCollection where allergyList.name == button.titleLabel?.text {
-               button.setImage(UIImage(named: "checkButtonON"), for: .selected)
-               button.isSelected = true
-            }
+            button.setImage(UIImage(named: "checkButtonON"), for: .selected)
+            button.isSelected = true
          }
       }
+   }
    
    private func deleteAllergie(allergy name: String) {
       for allergie in RecipeService.shared.allergiesArray {
@@ -59,5 +56,17 @@ class AllergiesViewController: UIViewController {
             RecipeService.shared.allergiesArray.remove(at: index)
          }
       }
+   }
+   
+   @IBAction func dismiss(_ sender: UITapGestureRecognizer) {
+       dismiss(animated: true, completion: nil)
+   }
+}
+extension AllergiesViewController {
+   func getDesign(){
+      backgroundView.layer.cornerRadius = 10
+      backgroundView.clipsToBounds = true
+      doneButton.layer.cornerRadius = 10
+      doneButton.clipsToBounds = true
    }
 }

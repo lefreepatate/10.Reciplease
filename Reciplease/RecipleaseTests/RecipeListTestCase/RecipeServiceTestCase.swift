@@ -7,8 +7,6 @@
 //
 
 import XCTest
-import Alamofire
-import CoreData
 @testable import Reciplease
 
 class RecipeServiceTestCase: XCTestCase {
@@ -76,13 +74,23 @@ class RecipeServiceTestCase: XCTestCase {
    }
    func testRecipeServiceShouldSuccessCallbackResponseEqualsTrue() {
       // Given
-      let expectation = XCTestExpectation(description: "Wait for queue change")
       getRecipesSession(data: FakeListResponseData.recipeCorrectData, response: FakeListResponseData.responseOK, error: nil)      
       recipeService.getRecipes { (response, error) in
          XCTAssertNotNil(response)
          XCTAssertNil(error)
-         XCTAssertEqual(response![0].recipeName, "Bacon Cucumber and Tomato Salad")
-         expectation.fulfill()
+         XCTAssertEqual(response!.matches![0].sourceDisplayName, "A Sweet double test")
+         self.expectation.fulfill()
+      }
+      wait(for: [expectation], timeout: 0.05)
+   }
+   func testGivenAllergiesShouldsuccessCallbackCorrectData() {
+      // Given
+      getRecipesSession(data: FakeListResponseData.recipeAllergyCorrectData, response: FakeListResponseData.responseOK, error: nil)
+      recipeService.getRecipes { (response, error) in
+         XCTAssertNotNil(response)
+         XCTAssertNil(error)
+         XCTAssertEqual(response!.matches![0].sourceDisplayName, "A Sweet Allergy Test")
+         self.expectation.fulfill()
       }
       wait(for: [expectation], timeout: 0.05)
    }

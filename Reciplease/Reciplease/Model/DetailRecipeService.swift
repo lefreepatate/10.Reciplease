@@ -11,33 +11,27 @@ import Alamofire
 import AlamofireImage
 
 class DetailRecipeService {
+   
    static let shared = DetailRecipeService()
-   init() {}
    
-   typealias WebServiceResponse = (Detail?, Error?) -> Void
+   // MARK: -- FAKE DATATASK FOR TESTING
+   let networkRequest: NetworkRequest
+   init(_ networkRequest: NetworkRequest = RealNetworkRequest()) {
+      self.networkRequest = networkRequest
+   }
    
-   func getDetail(with recipeId: String, completion: @escaping WebServiceResponse) {
+   func getDetail(with recipeId: String, completion: @escaping (Detail?, Error?) -> Void) {
       let urlRequest = getUrlRequest(with: recipeId)
-      Alamofire.request(urlRequest).responseJSON { (response) in
-         guard let data = response.data, response.error == nil
-            else { return  completion(nil, response.error) }
-         guard let detail = try? JSONDecoder().decode(Detail.self, from: data)
-            else { return completion(nil, response.error) }
-         completion(detail, nil)
+      networkRequest.getRequest(urlRequest) { (response, error) in
+         completion(response, nil)
       }
    }
    
    func getDetailImage(with stringURL : String, completion : @escaping (UIImage?, Error?) -> Void) {
-      Alamofire.request(stringURL).responseImage { (response) in
-         if let image = response.result.value {
-            let size = CGSize(width: 360, height: 240 )
-            let scaledImage = image.af_imageScaled(to: size)
-            completion(scaledImage, nil)
-         }
-      }
+      
    }
    
-   private func getUrlRequest(with recipeId: String) -> URLRequest {
+   private func getUrlRequest(with recipeId: String) -> URL {
       let id = "***"
       let key = "***"
       let recipeId = recipeId
@@ -45,8 +39,6 @@ class DetailRecipeService {
       let apiURL = "https://api.yummly.com/v1/api/recipe/\(parameters)"
       let encondedString = apiURL.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)!
       let url = URL(string: encondedString)!
-      var urlRequest = URLRequest(url: url)
-      urlRequest.httpMethod = "GET"
-      return urlRequest
+      return url
    }
 }

@@ -10,16 +10,6 @@ import Foundation
 import Alamofire
 import AlamofireImage
 
-class RealNetworkRequest: NetworkRequest {
-   func getRequest(_ url: URL, completion: @escaping ([Match]?, Error?) -> Void) {
-      Alamofire.request(url).responseJSON { (response) in
-         guard let data = response.data, response.error == nil else { return }
-         guard let recipes = try? JSONDecoder().decode(Recipe.self, from: data) else { return }
-         completion(recipes.matches, nil)
-      }
-   }
-}
-
 class RecipeService {
    
    static let shared = RecipeService()
@@ -33,20 +23,10 @@ class RecipeService {
    var ingredientsArray = [Ingredients]()
    var allergiesArray = [Allergies]()
    
-   func getRecipes(completion: @escaping ([Match]?, Error?) -> Void) {
+   func getRecipes(completion: @escaping (Recipe?, Error?) -> Void) {
       let urlRequest = getUrlRequest()
       networkRequest.getRequest(urlRequest) { (response, error) in
          completion(response, nil)
-      }
-   }
-   
-   func getImage(with stringURL : String, completion : @escaping (UIImage?, Error?) -> Void) {
-      Alamofire.request(stringURL).responseImage { (response) in
-         if let image = response.result.value {
-            let size = CGSize(width: 90, height: 90)
-            let scaledImage = image.af_imageScaled(to: size)
-            completion(scaledImage, nil)
-         }
       }
    }
    
@@ -59,6 +39,7 @@ class RecipeService {
       let apiURL = "https://api.yummly.com/v1/api/recipes?\(parameters)"
       let encondedString = apiURL.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)!
       let url = URL(string: encondedString)!
+      print(url)
       return url
    }
    

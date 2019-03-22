@@ -26,7 +26,7 @@ class ResultsViewController: UIViewController {
    private func alamofireRecipes() {
       RecipeService.shared.getRecipes { (response, error) in
          if let response = response {
-            self.recipes = response
+            self.recipes = response.matches!
             self.toggleActivityIndicator(shown: false)
             self.tableView.reloadData()
          } else if let error = error {
@@ -75,11 +75,9 @@ extension ResultsViewController: UITableViewDataSource {
       return cell
    }
    private func imageCellView(cell: RecipesTableViewcell, url: String )  {
-      RecipeService.shared.getImage(with: url) { (image, error) in
+      UIImage.from(url, width: 90, height: 90) { (image) in
          if let image = image {
             self.recipeImage = image
-         } else if let error = error {
-            print(error)
          }
          cell.picture?.image = image
       }
@@ -101,6 +99,19 @@ extension ResultsViewController: UITableViewDelegate {
          recipes.remove(at: indexPath.row)
          tableView.deleteRows(at: [indexPath], with:.middle)
          try? AppDelegate.viewContext.save()
+      }
+   }
+}
+extension UIImage {
+   static func from(_ stringURL: String, width: Int, height: Int, completion: @escaping (UIImage?) -> Void) {
+      Alamofire.request(stringURL).responseImage { (response) in
+         if let image = response.result.value {
+            let size = CGSize(width: width, height: height)
+            let scaledImage = image.af_imageScaled(to: size)
+            completion(scaledImage)
+         } else {
+            completion(nil)
+         }
       }
    }
 }

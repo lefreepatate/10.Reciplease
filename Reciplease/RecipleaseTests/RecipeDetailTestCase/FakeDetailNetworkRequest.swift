@@ -1,18 +1,20 @@
 //
-//  FakeNetworkRequest.swift
+//  FakeDetailNetworkRequest.swift
 //  RecipleaseTests
 //
-//  Created by Carlos Garcia-Muskat on 19/03/2019.
+//  Created by Carlos Garcia-Muskat on 22/03/2019.
 //  Copyright © 2019 Carlos Garcia-Muskat. All rights reserved.
 //
 
 import Foundation
 @testable import Reciplease
 
-struct FakeNetworkRequest: NetworkRequest {
+struct FakeDetailNetworkRequest: NetworkRequest {
+   
+   
+   let data: Data?
    let response: HTTPURLResponse?
    let error: Error?
-   let data: Data?
    
    init(data: Data?, response: HTTPURLResponse?, error: Error?){
       self.data = data
@@ -20,8 +22,7 @@ struct FakeNetworkRequest: NetworkRequest {
       self.error = error
    }
    func getRequest<Type: Decodable>(_ url: URL, completion: @escaping (Type?, Error?) -> Void) {
-      let result = try? JSONDecoder().decode(Type.self, from: self.data!)
+      let result = try? JSONDecoder().decode(Type.self, from: data!)
       completion(result, nil)
    }
 }
-

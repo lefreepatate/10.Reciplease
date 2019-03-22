@@ -51,14 +51,12 @@ class DetailViewController: UIViewController {
       }
    }
    private func detailImage(with url: String){
-      DetailRecipeService.shared.getDetailImage(with: url) { (image, error) in
+      UIImage.from(url, width: 360, height: 240) { (image) in
          if let image = image {
             self.recipeImage.contentMode = .scaleAspectFill
             self.recipeImage?.image = image
-         } else if let error = error {
-            print(error)
-         }
       }
+   }
    }
    @objc private func saveFavorite() {
       let recipes = RecipeDetails(context: AppDelegate.viewContext)

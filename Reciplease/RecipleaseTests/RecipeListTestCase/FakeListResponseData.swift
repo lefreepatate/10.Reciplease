@@ -7,13 +7,24 @@
 //
 
 import Foundation
-import Alamofire
 
 class FakeListResponseData {
    
    static var recipeCorrectData: Data? {
       let bundle = Bundle(for: FakeListResponseData.self)
       let bundleUrl = bundle.url(forResource: "RecipeList", withExtension: "json")
+      return try! Data(contentsOf: bundleUrl!)
+   }
+   
+   static var recipeAllergyCorrectData: Data? {
+      let bundle = Bundle(for: FakeListResponseData.self)
+      let bundleUrl = bundle.url(forResource: "RecipeListWithAllergies", withExtension: "json")
+      return try! Data(contentsOf: bundleUrl!)
+   }
+   
+   static var recipeDetailCorrectData: Data? {
+      let bundle = Bundle(for: FakeListResponseData.self)
+      let bundleUrl = bundle.url(forResource: "RecipeDetail", withExtension: "json")
       return try! Data(contentsOf: bundleUrl!)
    }
    

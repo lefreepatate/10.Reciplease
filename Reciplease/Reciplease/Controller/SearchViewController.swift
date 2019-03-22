@@ -72,7 +72,9 @@ extension SearchViewController: UITextFieldDelegate {
    @IBAction func dismissKeyboard(_ sender: UITapGestureRecognizer) {
       searchBar.resignFirstResponder()
    }
-   @IBAction func unwindToSearchVC(_ sender: UIStoryboardSegue) { }
+   @IBAction func unwindToSearchVC(_ sender: UIStoryboardSegue) {
+      allergiesAddButton.resignFirstResponder()
+   }
    
 }
 extension SearchViewController {
