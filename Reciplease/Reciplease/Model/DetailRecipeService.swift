@@ -7,8 +7,6 @@
 //
 
 import Foundation
-import Alamofire
-import AlamofireImage
 
 class DetailRecipeService {
    
@@ -21,17 +19,13 @@ class DetailRecipeService {
    }
    
    func getDetail(with recipeId: String, completion: @escaping (Detail?, Error?) -> Void) {
-      let urlRequest = getUrlRequest(with: recipeId)
+      let urlRequest = getUrl(with: recipeId)
       networkRequest.getRequest(urlRequest) { (response, error) in
          completion(response, nil)
       }
    }
    
-   func getDetailImage(with stringURL : String, completion : @escaping (UIImage?, Error?) -> Void) {
-      
-   }
-   
-   private func getUrlRequest(with recipeId: String) -> URL {
+   private func getUrl(with recipeId: String) -> URL {
       let id = "***"
       let key = "***"
       let recipeId = recipeId

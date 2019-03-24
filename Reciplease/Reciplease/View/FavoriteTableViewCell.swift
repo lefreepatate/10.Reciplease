@@ -14,7 +14,6 @@ class FavoriteTableViewCell: UITableViewCell {
    @IBOutlet weak var ingredientsLbl: UILabel!
    @IBOutlet weak var ratingLbl: UILabel!
    @IBOutlet weak var recipeImg: UIImageView!
-   
    override func awakeFromNib() {
       super.awakeFromNib()
       getDesign()
@@ -23,6 +22,7 @@ class FavoriteTableViewCell: UITableViewCell {
    override func setSelected(_ selected: Bool, animated: Bool) {
       super.setSelected(selected, animated: animated)
    }
+   
    func getDesign() {
       lengthlbl.clipsToBounds = true
       lengthlbl.layer.cornerRadius = lengthlbl.frame.height/2

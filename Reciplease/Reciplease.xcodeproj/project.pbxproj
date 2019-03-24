@@ -10,6 +10,8 @@
 		AAAB06910B3437AA00603C95 /* Pods_Reciplease.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0F54BF4D86A8BA2AB3F43A3 /* Pods_Reciplease.framework */; };
 		EC0DF37D221478AE00F2D788 /* Elements.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0DF37C221478AE00F2D788 /* Elements.swift */; };
 		EC0DF37F22147E0B00F2D788 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD9F8B42209DEDE007DE7E2 /* AppDelegate.swift */; };
+		EC1EC4E0224654430074C5FC /* FavoritesTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1EC4DF224654430074C5FC /* FavoritesTestCase.swift */; };
+		EC1EC4E2224799480074C5FC /* ALertMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1EC4E1224799480074C5FC /* ALertMessage.swift */; };
 		EC29628722214FA900A945FA /* DetailRecipeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC29628622214FA900A945FA /* DetailRecipeService.swift */; };
 		EC33E1902225525600FC7575 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC33E18F2225525600FC7575 /* FavoritesViewController.swift */; };
 		EC33E194222576BD00FC7575 /* FavoriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC33E193222576BD00FC7575 /* FavoriteTableViewCell.swift */; };
@@ -59,6 +61,8 @@
 		A0F54BF4D86A8BA2AB3F43A3 /* Pods_Reciplease.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Reciplease.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8DCBB2094F735C1AABE86BA /* Pods-RecipleaseTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecipleaseTests.release.xcconfig"; path = "Target Support Files/Pods-RecipleaseTests/Pods-RecipleaseTests.release.xcconfig"; sourceTree = "<group>"; };
 		EC0DF37C221478AE00F2D788 /* Elements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Elements.swift; sourceTree = "<group>"; };
+		EC1EC4DF224654430074C5FC /* FavoritesTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesTestCase.swift; sourceTree = "<group>"; };
+		EC1EC4E1224799480074C5FC /* ALertMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ALertMessage.swift; sourceTree = "<group>"; };
 		EC29628622214FA900A945FA /* DetailRecipeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRecipeService.swift; sourceTree = "<group>"; };
 		EC33E18F2225525600FC7575 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		EC33E193222576BD00FC7575 /* FavoriteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteTableViewCell.swift; sourceTree = "<group>"; };
@@ -137,6 +141,7 @@
 		EC9C87B82229394A00C40452 /* RecipleaseTests */ = {
 			isa = PBXGroup;
 			children = (
+				EC1EC4DF224654430074C5FC /* FavoritesTestCase.swift */,
 				ECCC1EDC223AA11E00F7534D /* RecipeListTestCase */,
 				ECCC1EDD223AA13B00F7534D /* RecipeDetailTestCase */,
 				EC9C87BB2229394A00C40452 /* Info.plist */,
@@ -211,6 +216,7 @@
 				ECD9F8B82209DEDE007DE7E2 /* ResultsViewController.swift */,
 				EC6CB0CA22205F0500F8B135 /* DetailViewController.swift */,
 				EC33E18F2225525600FC7575 /* FavoritesViewController.swift */,
+				EC1EC4E1224799480074C5FC /* ALertMessage.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -410,6 +416,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ECFAA3C72244E2A500D3B91E /* FakeDetailNetworkRequest.swift in Sources */,
+				EC1EC4E0224654430074C5FC /* FavoritesTestCase.swift in Sources */,
 				ECFAA3C42244DC9000D3B91E /* RecipeDetailTestCase.swift in Sources */,
 				ECCC1EDF223AA16800F7534D /* FakeListResponseData.swift in Sources */,
 				ECC12BEB2240EA260072C0FE /* FakeNetworkRequest.swift in Sources */,
@@ -436,6 +443,7 @@
 				EC0DF37F22147E0B00F2D788 /* AppDelegate.swift in Sources */,
 				EC7B39C82237CEB100B2D88F /* AllergiesViewController.swift in Sources */,
 				ECC2FCAA22356322008B59E9 /* Detail_JSON.swift in Sources */,
+				EC1EC4E2224799480074C5FC /* ALertMessage.swift in Sources */,
 				ECD9F8D72209F0A6007DE7E2 /* RecipeService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

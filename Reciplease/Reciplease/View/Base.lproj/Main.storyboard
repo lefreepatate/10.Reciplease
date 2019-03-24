@@ -27,8 +27,8 @@
         <scene sceneID="hNz-n2-bh7">
             <objects>
                 <viewController id="9pv-A4-QxB" customClass="SearchViewController" customModule="Reciplease" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" misplaced="YES" id="tsR-hK-woN">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="315"/>
+                    <view key="view" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" id="tsR-hK-woN">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="309"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="H68-1q-NOo">
@@ -406,7 +406,7 @@
         <scene sceneID="wg7-f3-ORb">
             <objects>
                 <viewController storyboardIdentifier="Results" id="8rJ-Kc-sve" userLabel="Results" customClass="ResultsViewController" customModule="Reciplease" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="QS5-Rx-YEW">
+                    <view key="view" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" id="QS5-Rx-YEW">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="315"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -555,7 +555,7 @@ fsdqfsd</string>
         <scene sceneID="QhG-iD-MAJ">
             <objects>
                 <viewController storyboardIdentifier="DetailViewController" id="YNa-Ip-FIJ" customClass="DetailViewController" customModule="Reciplease" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" id="5l9-n2-3N4">
+                    <view key="view" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" id="5l9-n2-3N4">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="315"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -906,6 +906,7 @@ fsdqfsd</string>
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
+                                            <outletCollection property="gestureRecognizers" destination="kcs-u9-Hiu" appends="YES" id="Rq8-qu-K3t"/>
                                             <segue destination="ZkE-5C-Gg6" kind="unwind" unwindAction="unwindToSearchVC:" id="TsC-2r-oml"/>
                                         </connections>
                                     </button>
@@ -947,7 +948,7 @@ fsdqfsd</string>
                         <outletCollection property="radioButtonCollection" destination="Xz0-LE-L39" collectionClass="NSMutableArray" id="Q5O-G8-ku2"/>
                         <outletCollection property="radioButtonCollection" destination="Gly-Jw-hDg" collectionClass="NSMutableArray" id="2ue-kg-FJY"/>
                         <outletCollection property="radioButtonCollection" destination="9b2-79-TTn" collectionClass="NSMutableArray" id="JPI-Ir-mpN"/>
-                        <segue destination="ZkE-5C-Gg6" kind="unwind" unwindAction="unwindToSearchVC:" id="z8d-c1-qzz"/>
+                        <segue destination="ZkE-5C-Gg6" kind="unwind" identifier="AllergiesVC" unwindAction="unwindToSearchVC:" id="z8d-c1-qzz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iE0-A4-68X" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -7,12 +7,12 @@
 //
 
 import Foundation
-import Alamofire
-import AlamofireImage
 
 class RecipeService {
    
    static let shared = RecipeService()
+   var ingredientsArray = [Ingredients]()
+   var allergiesArray = [Allergies]()
    
    // MARK: -- FAKE DATATASK FOR TESTING
    let networkRequest: NetworkRequest
@@ -20,26 +20,22 @@ class RecipeService {
       self.networkRequest = networkRequest
    }
    
-   var ingredientsArray = [Ingredients]()
-   var allergiesArray = [Allergies]()
-   
    func getRecipes(completion: @escaping (Recipe?, Error?) -> Void) {
-      let urlRequest = getUrlRequest()
+      let urlRequest = getUrl()
       networkRequest.getRequest(urlRequest) { (response, error) in
          completion(response, nil)
       }
    }
    
-   private func getUrlRequest() -> URL {
+   private func getUrl() -> URL {
       let id = "***"
       let key = "***"
       let allergies = getAllergies()
       let ingredients = getIngredients()
-      let parameters = "_app_id=\(id)&_app_key=\(key)&q=\(ingredients + allergies)"
+      let parameters = "_app_id=\(id)&_app_key=\(key)&q=\(ingredients + allergies)&maxResult=15"
       let apiURL = "https://api.yummly.com/v1/api/recipes?\(parameters)"
       let encondedString = apiURL.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)!
       let url = URL(string: encondedString)!
-      print(url)
       return url
    }
    

@@ -21,27 +21,16 @@ class SearchViewController: UIViewController {
    @IBOutlet weak var switchAllergies: UISwitch!
    @IBOutlet weak var allergiesAddButton: UIButton!
    @IBAction func switchAction(_ sender: UISwitch) {
-      if switchAllergies.isOn {
-         allergiesAddButton.isHidden = false
-      } else {
-         RecipeService.shared.allergiesArray = []
-         allergiesAddButton.isHidden = true
-      }
+    checkAllergies()
    }
    @IBAction func addIngredientTappedButton(_ sender: UIButton) {
       addIngredients()
    }
    @IBAction func clearTappedButton(_ sender: UIButton) {
-      RecipeService.shared.ingredientsArray = []
-      switchAllergies.isOn = false
-      ingredientsList.text = ""
+      resetList()
    }
    @IBAction func searchRecipesButton(_ sender: UIButton) {
-      if ingredientsList.text != "" {
-         performSegue(withIdentifier: "Results", sender: nil)
-      } else {
-         presentAlert(with: "Your fridge is empty ?")
-      }
+      checkList()
    }
    override func viewDidLoad() {
       super.viewDidLoad()
@@ -49,17 +38,33 @@ class SearchViewController: UIViewController {
    }
    
    var ingredient = Ingredients()
+   
+   private func checkAllergies() {
+      if switchAllergies.isOn {
+         allergiesAddButton.isHidden = false
+      } else {
+         RecipeService.shared.allergiesArray = []
+         allergiesAddButton.isHidden = true
+      }
+   }
+   private func checkList() {
+      if ingredientsList.text != "" {
+         performSegue(withIdentifier: "Results", sender: nil)
+      } else {
+         presentAlert(with: "Your fridge is empty ?")
+      }
+   }
+   private func resetList() {
+      RecipeService.shared.ingredientsArray = []
+      switchAllergies.isOn = false
+      ingredientsList.text = ""
+   }
    func addIngredients() {
       guard let name = searchBar.text else { return }
       ingredient.name = name
       RecipeService.shared.ingredientsArray.append(ingredient)
       ingredientsList.text += "✓" + ingredient.name + "\n"
       searchBar.text = ""
-   }
-   private func presentAlert(with message: String) {
-      let alertVC = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
-      alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-      present(alertVC, animated: true, completion: nil)
    }
 }
 
@@ -71,9 +76,6 @@ extension SearchViewController: UITextFieldDelegate {
    }
    @IBAction func dismissKeyboard(_ sender: UITapGestureRecognizer) {
       searchBar.resignFirstResponder()
-   }
-   @IBAction func unwindToSearchVC(_ sender: UIStoryboardSegue) {
-      allergiesAddButton.resignFirstResponder()
    }
    
 }

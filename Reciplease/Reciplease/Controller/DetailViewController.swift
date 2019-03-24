@@ -45,8 +45,8 @@ class DetailViewController: UIViewController {
             self.recipe = response
             self.setDatas()
             self.toggleActivityIndicator(shown: false)
-         } else if let error = error {
-            print(error)
+         } else {
+            self.presentAlert(with: "There was an error while downloading data!")
          }
       }
    }
@@ -90,8 +90,10 @@ class DetailViewController: UIViewController {
       recipeLenght.text = recipe?.totalTime
    }
    func favoriteButtonNavigationBar() {
-      let barButtonSave = UIBarButtonItem(title: "★", style: .plain, target: self, action: #selector(saveFavorite))
-      let barButtonDelete = UIBarButtonItem(title: "★", style: .plain, target: self, action: #selector(deleteFavorite))
+      let barButtonSave =
+         UIBarButtonItem(title: "★", style: .plain, target: self, action: #selector(saveFavorite))
+      let barButtonDelete =
+         UIBarButtonItem(title: "★", style: .plain, target: self, action: #selector(deleteFavorite))
       self.navigationItem.setRightBarButton(barButtonSave, animated: false)
       navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
       for recipes in RecipeDetails.all where (getRecipeID == recipes.id) {
@@ -99,6 +101,7 @@ class DetailViewController: UIViewController {
          navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
       }
    }
+   
    private func toggleActivityIndicator(shown: Bool) {
       recipeImage.isHidden = shown
       recipeIngredients.isHidden = shown

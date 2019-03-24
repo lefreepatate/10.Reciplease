@@ -18,7 +18,6 @@ class FavoritesViewController: UIViewController {
       recipes = RecipeDetails.all
       toggleActivityIndicator(shown: true)
       checkFavorites()
-      print("Recipes", recipes.count)
       tableView.reloadData()
    }
 }
@@ -50,8 +49,8 @@ extension FavoritesViewController: UITableViewDataSource {
    
    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
       let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-      let destinationVC = storyBoard.instantiateViewController(withIdentifier: "DetailViewController")
-         as? DetailViewController
+      let destinationVC = storyBoard.instantiateViewController(
+         withIdentifier: "DetailViewController") as? DetailViewController
       let recipe = recipes[indexPath.row]
       destinationVC?.getRecipeID = recipe.id ?? ""
       self.navigationController?.pushViewController(destinationVC!, animated: true)
@@ -77,8 +76,8 @@ extension FavoritesViewController: UITableViewDataSource {
    }
 }
 extension FavoritesViewController: UITableViewDelegate {
-   
-   func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+   func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle,
+                  forRowAt indexPath: IndexPath) {
       if editingStyle == .delete && recipes.count > 0 {
          AppDelegate.viewContext.delete(recipes.remove(at: indexPath.row))
          tableView.deleteRows(at: [indexPath], with: .middle)

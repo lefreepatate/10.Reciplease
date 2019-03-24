@@ -29,13 +29,13 @@ class ResultsViewController: UIViewController {
             self.recipes = response.matches!
             self.toggleActivityIndicator(shown: false)
             self.tableView.reloadData()
-         } else if let error = error {
+         } else if self.recipes.isEmpty {
             self.emptyResponse()
-            print(error)
+            self.presentAlert(with: "There was an error while downloading data!")
          }
       }
    }
-
+   
    private func emptyResponse() {
       self.emptylabel.text = "Sorry!\n\nWe didn't find any recipes for you :(\n\nTry again!"
       self.tableView.isHidden = true
@@ -69,7 +69,7 @@ extension ResultsViewController: UITableViewDataSource {
       cell.length.text = "\(recipe.totalTimeInSeconds / 60) min"
       DispatchQueue.main.async {
          if let imageURL = image.the90 as String? {
-         self.imageCellView(cell: cell, url: imageURL)
+            self.imageCellView(cell: cell, url: imageURL)
          }
       }
       return cell
@@ -85,8 +85,8 @@ extension ResultsViewController: UITableViewDataSource {
    
    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
       let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-      let destinationVC = storyBoard.instantiateViewController(withIdentifier: "DetailViewController")
-         as! DetailViewController
+      let destinationVC = storyBoard.instantiateViewController(
+         withIdentifier: "DetailViewController") as! DetailViewController
       let recipe = recipes[indexPath.row]
       destinationVC.getRecipeID = recipe.id
       self.navigationController?.pushViewController(destinationVC, animated: true)
@@ -103,7 +103,8 @@ extension ResultsViewController: UITableViewDelegate {
    }
 }
 extension UIImage {
-   static func from(_ stringURL: String, width: Int, height: Int, completion: @escaping (UIImage?) -> Void) {
+   static func from(_ stringURL: String, width: Int, height: Int,
+                    completion: @escaping (UIImage?) -> Void) {
       Alamofire.request(stringURL).responseImage { (response) in
          if let image = response.result.value {
             let size = CGSize(width: width, height: height)
