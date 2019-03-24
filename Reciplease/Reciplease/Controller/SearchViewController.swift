@@ -16,9 +16,9 @@ class SearchViewController: UIViewController {
    @IBOutlet weak var addButton: UIButton!
    @IBOutlet weak var clearButton: UIButton!
    @IBOutlet weak var ingredientsList: UITextView!
-   @IBOutlet weak var containerView: UIView!
    @IBOutlet weak var listView: UIView!
    @IBOutlet weak var switchAllergies: UISwitch!
+   @IBOutlet weak var allergiesLabel: UILabel!
    @IBOutlet weak var allergiesAddButton: UIButton!
    @IBAction func switchAction(_ sender: UISwitch) {
     checkAllergies()
@@ -42,9 +42,11 @@ class SearchViewController: UIViewController {
    private func checkAllergies() {
       if switchAllergies.isOn {
          allergiesAddButton.isHidden = false
+         allergiesLabel.layer.opacity = 1
       } else {
          RecipeService.shared.allergiesArray = []
          allergiesAddButton.isHidden = true
+         allergiesLabel.layer.opacity = 0.5
       }
    }
    private func checkList() {
@@ -66,6 +68,7 @@ class SearchViewController: UIViewController {
       ingredientsList.text += "✓" + ingredient.name + "\n"
       searchBar.text = ""
    }
+   @IBAction func unwindToSearch(_ sender: UIStoryboardSegue) { }
 }
 
 extension SearchViewController: UITextFieldDelegate {
@@ -83,7 +86,7 @@ extension SearchViewController {
    func getDesign() {
       listView.layer.borderWidth = 1
       listView.layer.borderColor = #colorLiteral(red: 0.1503180861, green: 1, blue: 0.4878128767, alpha: 1)
-      listView.layer.cornerRadius = listView.frame.width/16
+      listView.layer.cornerRadius = 16
       listView.clipsToBounds = true
       searchButton.layer.cornerRadius = searchButton.frame.height/2
       clearButton.layer.cornerRadius = clearButton.frame.height/2

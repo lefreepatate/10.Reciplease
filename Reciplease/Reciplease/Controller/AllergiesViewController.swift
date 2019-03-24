@@ -17,7 +17,6 @@ class AllergiesViewController: UIViewController {
    @IBAction func allergieButtonTapped(_ sender: UIButton) {
       checkButton(on: sender)
    }
-   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {}
    override func viewDidLoad() {
       super.viewDidLoad()
       refreshAllergies()
